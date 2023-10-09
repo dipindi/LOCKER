@@ -127,11 +127,27 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="loginForm.cpp" />
+    <ClCompile Include="homeForm.cpp" />
+    <ClCompile Include="registerForm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="loginForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="homeForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="registerForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="loginForm.resx">
+      <DependentUpon>loginForm.h</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="users.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
