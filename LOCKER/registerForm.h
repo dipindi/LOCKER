@@ -100,6 +100,7 @@ namespace LOCKER {
 			this->passwordBox->Name = L"passwordBox";
 			this->passwordBox->Size = System::Drawing::Size(190, 28);
 			this->passwordBox->TabIndex = 10;
+			this->passwordBox->UseSystemPasswordChar = true;
 			// 
 			// usernameBox
 			// 
@@ -134,6 +135,7 @@ namespace LOCKER {
 			// 
 			// registerForm
 			// 
+			this->AcceptButton = this->signupButton;
 			this->AutoScaleDimensions = System::Drawing::SizeF(10, 25);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(244)),

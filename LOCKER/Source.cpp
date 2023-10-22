@@ -2,6 +2,7 @@
 #include "loginForm.h"
 #include "registerForm.h"
 #include "homeForm.h"
+#include "uploadForm.h"
 
 // Users Header file
 #include "Users.h"
@@ -11,30 +12,52 @@ using namespace System::Windows::Forms;
 
 [STAThreadAttribute]
 
-void regisUser();
-void authUser();
+void startLocker();
+void regisWindow();
+void homeWindow();
+void uploadWindow();
 
-void regisUser() {
+void startLocker() {
+	LOCKER::loginForm login;
+	Application::Run(% login);
+	
+	if (login.openRegis) {
+		regisWindow();
+	}
+
+	if (login.openHome) {
+		homeWindow();
+	}
+}
+
+void regisWindow() {
 	LOCKER::registerForm regis;
 	regis.ShowDialog();
 
 	if (regis.backToLogin) {
-		authUser();
+		startLocker();
 	}
 }
 
-void authUser() {
-	LOCKER::loginForm login;
-	LOCKER::
-	Application::Run(% login);
-	
-	if (login.switchToRegis) {
-		regisUser();
+void homeWindow() {
+	LOCKER::homeForm home;
+	home.ShowDialog();
+
+	if (home.signOff) {
+		startLocker();
 	}
 
-	if (login.switchToMain) {
-		LOCKER::homeForm home;
-		home.ShowDialog();
+	if (home.openUpload) {
+		uploadWindow();
+	}
+}
+
+void uploadWindow() {
+	LOCKER::uploadForm upload;
+	upload.ShowDialog();
+
+	if (upload.backToHome) {
+		homeWindow();
 	}
 }
 
@@ -42,5 +65,5 @@ void main(array<String^>^ args) {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 	
-	authUser();
+	startLocker();
 }

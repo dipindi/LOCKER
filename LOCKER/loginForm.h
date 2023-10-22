@@ -176,7 +176,7 @@ namespace LOCKER {
 		}
 
 #pragma endregion
-	public: bool switchToMain = false;
+	public: bool openHome = false;
 	private: System::Void signinButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ username = this->usernameBox->Text;
 		String^ password = this->passwordBox->Text;
@@ -184,7 +184,7 @@ namespace LOCKER {
 		bool auth = checkCredentials(username, password);
 
 		if (auth) {
-			switchToMain = true;
+			openHome = true;
 			this->Close();
 		}
 		else {
@@ -196,9 +196,9 @@ namespace LOCKER {
 		this->Close();
 	}
 	
-	public: bool switchToRegis = false;
+	public: bool openRegis = false;
 	private: System::Void regisLink_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
-		switchToRegis = true;
+		openRegis = true;
 		this->Close();
 	}
 };
