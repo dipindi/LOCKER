@@ -1,16 +1,5 @@
 #pragma once
-#include "homeForm.h"
-#include "registerForm.h"
-#include <fstream>
-#include <vector>
-#include <string>
-
-static struct loginCredentials {
-	std::string username;
-	std::string password;
-};
-
-static std::vector<loginCredentials> users;
+#include "Users.h"
 
 namespace LOCKER {
 
@@ -21,9 +10,6 @@ namespace LOCKER {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	/// <summary>
-	/// Summary for MyForm
-	/// </summary>
 	public ref class loginForm : public System::Windows::Forms::Form
 	{
 	public:
@@ -34,9 +20,6 @@ namespace LOCKER {
 		}
 
 	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
 		~loginForm()
 		{
 			if (components)
@@ -51,55 +34,71 @@ namespace LOCKER {
 	private: System::Windows::Forms::Button^ exitButton;
 	private: System::Windows::Forms::LinkLabel^ regisLink;
 
+
+	private: System::Windows::Forms::Label^ passLabel;
+	private: System::Windows::Forms::Label^ userLabel;
+	private: System::Windows::Forms::PictureBox^ pictureBox1;
+
 	private:
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(loginForm::typeid));
 			this->usernameBox = (gcnew System::Windows::Forms::TextBox());
 			this->passwordBox = (gcnew System::Windows::Forms::TextBox());
 			this->signinButton = (gcnew System::Windows::Forms::Button());
 			this->exitButton = (gcnew System::Windows::Forms::Button());
 			this->regisLink = (gcnew System::Windows::Forms::LinkLabel());
+			this->passLabel = (gcnew System::Windows::Forms::Label());
+			this->userLabel = (gcnew System::Windows::Forms::Label());
+			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// usernameBox
 			// 
-			this->usernameBox->Location = System::Drawing::Point(85, 140);
+			this->usernameBox->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(156)),
+				static_cast<System::Int32>(static_cast<System::Byte>(48)));
+			this->usernameBox->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->usernameBox->Font = (gcnew System::Drawing::Font(L"Fira Code", 11.5F));
+			this->usernameBox->Location = System::Drawing::Point(85, 164);
 			this->usernameBox->Name = L"usernameBox";
 			this->usernameBox->Size = System::Drawing::Size(190, 28);
 			this->usernameBox->TabIndex = 0;
 			// 
 			// passwordBox
 			// 
-			this->passwordBox->Location = System::Drawing::Point(85, 192);
+			this->passwordBox->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(156)),
+				static_cast<System::Int32>(static_cast<System::Byte>(48)));
+			this->passwordBox->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->passwordBox->Font = (gcnew System::Drawing::Font(L"Fira Code", 11.5F));
+			this->passwordBox->Location = System::Drawing::Point(85, 215);
 			this->passwordBox->Name = L"passwordBox";
 			this->passwordBox->Size = System::Drawing::Size(190, 28);
 			this->passwordBox->TabIndex = 1;
+			this->passwordBox->UseSystemPasswordChar = true;
 			// 
 			// signinButton
 			// 
-			this->signinButton->Location = System::Drawing::Point(45, 255);
+			this->signinButton->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(156)),
+				static_cast<System::Int32>(static_cast<System::Byte>(48)));
+			this->signinButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->signinButton->Location = System::Drawing::Point(78, 280);
 			this->signinButton->Name = L"signinButton";
-			this->signinButton->Size = System::Drawing::Size(131, 40);
+			this->signinButton->Size = System::Drawing::Size(96, 39);
 			this->signinButton->TabIndex = 2;
 			this->signinButton->Text = L"sign in";
-			this->signinButton->UseVisualStyleBackColor = true;
+			this->signinButton->UseVisualStyleBackColor = false;
 			this->signinButton->Click += gcnew System::EventHandler(this, &loginForm::signinButton_Click);
 			// 
 			// exitButton
 			// 
-			this->exitButton->Location = System::Drawing::Point(196, 255);
+			this->exitButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->exitButton->Location = System::Drawing::Point(194, 280);
 			this->exitButton->Name = L"exitButton";
-			this->exitButton->Size = System::Drawing::Size(131, 40);
+			this->exitButton->Size = System::Drawing::Size(96, 39);
 			this->exitButton->TabIndex = 3;
 			this->exitButton->Text = L"exit";
 			this->exitButton->UseVisualStyleBackColor = true;
@@ -108,7 +107,9 @@ namespace LOCKER {
 			// regisLink
 			// 
 			this->regisLink->AutoSize = true;
-			this->regisLink->Location = System::Drawing::Point(247, 338);
+			this->regisLink->LinkColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
+				static_cast<System::Int32>(static_cast<System::Byte>(27)));
+			this->regisLink->Location = System::Drawing::Point(264, 350);
 			this->regisLink->Name = L"regisLink";
 			this->regisLink->Size = System::Drawing::Size(92, 25);
 			this->regisLink->TabIndex = 4;
@@ -116,65 +117,89 @@ namespace LOCKER {
 			this->regisLink->Text = L"register";
 			this->regisLink->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &loginForm::regisLink_LinkClicked);
 			// 
+			// passLabel
+			// 
+			this->passLabel->AutoSize = true;
+			this->passLabel->Font = (gcnew System::Drawing::Font(L"Fira Code", 10));
+			this->passLabel->Location = System::Drawing::Point(82, 195);
+			this->passLabel->Name = L"passLabel";
+			this->passLabel->Size = System::Drawing::Size(74, 22);
+			this->passLabel->TabIndex = 7;
+			this->passLabel->Text = L"password";
+			// 
+			// userLabel
+			// 
+			this->userLabel->AutoSize = true;
+			this->userLabel->Font = (gcnew System::Drawing::Font(L"Fira Code", 10));
+			this->userLabel->Location = System::Drawing::Point(82, 145);
+			this->userLabel->Name = L"userLabel";
+			this->userLabel->Size = System::Drawing::Size(74, 22);
+			this->userLabel->TabIndex = 8;
+			this->userLabel->Text = L"username";
+			// 
+			// pictureBox1
+			// 
+			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
+			this->pictureBox1->Location = System::Drawing::Point(85, 32);
+			this->pictureBox1->Name = L"pictureBox1";
+			this->pictureBox1->Size = System::Drawing::Size(200, 98);
+			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
+			this->pictureBox1->TabIndex = 9;
+			this->pictureBox1->TabStop = false;
+			// 
 			// loginForm
 			// 
 			this->AcceptButton = this->signinButton;
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
+			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(244)),
+				static_cast<System::Int32>(static_cast<System::Byte>(235)));
 			this->ClientSize = System::Drawing::Size(368, 384);
+			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->regisLink);
 			this->Controls->Add(this->exitButton);
 			this->Controls->Add(this->signinButton);
 			this->Controls->Add(this->passwordBox);
 			this->Controls->Add(this->usernameBox);
+			this->Controls->Add(this->passLabel);
+			this->Controls->Add(this->userLabel);
 			this->Font = (gcnew System::Drawing::Font(L"Fira Code", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Margin = System::Windows::Forms::Padding(5, 6, 5, 6);
 			this->Name = L"loginForm";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"MyForm";
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 
-		void getCredentials (const std::string& filename) {
-			std::ifstream file(filename);
-			loginCredentials user;
-			while (file >> user.username >> user.password) {
-				users.push_back(user);
-			}
-			file.close();
-		}
-
-		bool checkCredentials(String^ username, String^ password) {
-			for (const auto& user : users) {
-				if (username == gcnew System::String(user.username.c_str()) && password == gcnew System::String(user.password.c_str())) {
-					return true;
-				}
-			}
-			return false;
-		}
-
 #pragma endregion
+	public: bool switchToMain = false;
 	private: System::Void signinButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ username = this->usernameBox->Text;
 		String^ password = this->passwordBox->Text;
 
-		bool successs = checkCredentials(username, password);
+		bool auth = checkCredentials(username, password);
 
-		if (successs) {
-			this->Hide();
-			homeForm^ home = gcnew homeForm();
-			home->ShowDialog();
+		if (auth) {
+			switchToMain = true;
+			this->Close();
+		}
+		else {
+			MessageBox::Show("Username or Password is incorrect");
 		}
 	}
+	
 	private: System::Void exitButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
 	}
+	
+	public: bool switchToRegis = false;
 	private: System::Void regisLink_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
-		this->Hide();
-		registerForm^ regis = gcnew registerForm();
-		regis->ShowDialog();
+		switchToRegis = true;
+		this->Close();
 	}
 };
 }
