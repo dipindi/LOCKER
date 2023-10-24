@@ -1,17 +1,17 @@
-// Forms
+// Form header files
 #include "loginForm.h"
 #include "registerForm.h"
 #include "homeForm.h"
 #include "uploadForm.h"
 
-// Users Header file
+// User Handling header file
 #include "Users.h"
 
 using namespace System;
 using namespace System::Windows::Forms;
 
 
-// Function declarations
+// Window Switching Functions
 void startLocker();
 void regisWindow();
 void homeWindow();
@@ -22,7 +22,7 @@ int main(array<String^>^ args) {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 
-	// Start the locker
+	// Start the application
 	startLocker();
 
 	return 0;
@@ -39,7 +39,7 @@ void startLocker() {
 	if (login.openHome) {
 		homeWindow();
 	}
-}
+} // end of startLocker
 
 void regisWindow() {
 	LOCKER::registerForm regis;
@@ -48,7 +48,7 @@ void regisWindow() {
 	if (regis.backToLogin) {
 		startLocker();
 	}
-}
+} // end of regisWindow
 
 void homeWindow() {
 	LOCKER::homeForm home;
@@ -61,7 +61,7 @@ void homeWindow() {
 	if (home.openUpload) {
 		uploadWindow();
 	}
-}
+} // end of homeWindow
 
 void uploadWindow() {
 	LOCKER::uploadForm upload;
@@ -70,4 +70,4 @@ void uploadWindow() {
 	if (upload.backToHome) {
 		homeWindow();
 	}
-}
+} // end of uploadWindow

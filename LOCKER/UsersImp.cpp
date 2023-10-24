@@ -28,8 +28,13 @@ void addCredentials(System::String^ username, System::String^ password) {
 
 	std::ofstream file("users.txt", std::ios::app);
 
+	// adds username and password in users.txt
 	if (file.is_open()) {
 		file << newUser.username << " " << newUser.password << std::endl;
 		file.close();
 	}
+	// create folder directory under [username]
+	//
+	// implementation here
+	//
 };
