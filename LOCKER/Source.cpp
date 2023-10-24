@@ -10,17 +10,28 @@
 using namespace System;
 using namespace System::Windows::Forms;
 
-[STAThreadAttribute]
 
+// Function declarations
 void startLocker();
 void regisWindow();
 void homeWindow();
 void uploadWindow();
 
+[STAThreadAttribute]
+int main(array<String^>^ args) {
+	Application::EnableVisualStyles();
+	Application::SetCompatibleTextRenderingDefault(false);
+
+	// Start the locker
+	startLocker();
+
+	return 0;
+}
+
 void startLocker() {
 	LOCKER::loginForm login;
 	Application::Run(% login);
-	
+
 	if (login.openRegis) {
 		regisWindow();
 	}
@@ -59,11 +70,4 @@ void uploadWindow() {
 	if (upload.backToHome) {
 		homeWindow();
 	}
-}
-
-void main(array<String^>^ args) {
-	Application::EnableVisualStyles();
-	Application::SetCompatibleTextRenderingDefault(false);
-	
-	startLocker();
 }

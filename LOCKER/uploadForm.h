@@ -40,9 +40,13 @@ namespace LOCKER {
 
 	private: System::Windows::Forms::Button^ cancelButton;
 	private: System::Windows::Forms::Panel^ panel2;
-	private: System::Windows::Forms::Panel^ panel3;
-	private: System::Windows::Forms::Panel^ panel4;
+
+
 	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::PictureBox^ pictureBox1;
+	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::OpenFileDialog^ ofd;
+	private: System::Windows::Forms::DateTimePicker^ dateTimePicker1;
 
 
 	protected:
@@ -66,11 +70,14 @@ namespace LOCKER {
 			this->confirmButton = (gcnew System::Windows::Forms::Button());
 			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
-			this->panel3 = (gcnew System::Windows::Forms::Panel());
-			this->panel4 = (gcnew System::Windows::Forms::Panel());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->ofd = (gcnew System::Windows::Forms::OpenFileDialog());
+			this->dateTimePicker1 = (gcnew System::Windows::Forms::DateTimePicker());
 			this->panel1->SuspendLayout();
 			this->panel2->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// panel1
@@ -132,24 +139,6 @@ namespace LOCKER {
 			this->panel2->Size = System::Drawing::Size(280, 154);
 			this->panel2->TabIndex = 4;
 			// 
-			// panel3
-			// 
-			this->panel3->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
-				static_cast<System::Int32>(static_cast<System::Byte>(27)));
-			this->panel3->Location = System::Drawing::Point(357, 52);
-			this->panel3->Name = L"panel3";
-			this->panel3->Size = System::Drawing::Size(215, 24);
-			this->panel3->TabIndex = 15;
-			// 
-			// panel4
-			// 
-			this->panel4->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
-				static_cast<System::Int32>(static_cast<System::Byte>(27)));
-			this->panel4->Location = System::Drawing::Point(376, 0);
-			this->panel4->Name = L"panel4";
-			this->panel4->Size = System::Drawing::Size(215, 32);
-			this->panel4->TabIndex = 16;
-			// 
 			// textBox1
 			// 
 			this->textBox1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(156)),
@@ -157,8 +146,42 @@ namespace LOCKER {
 			this->textBox1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->textBox1->Location = System::Drawing::Point(313, 82);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(278, 28);
+			this->textBox1->Size = System::Drawing::Size(278, 30);
 			this->textBox1->TabIndex = 17;
+			// 
+			// pictureBox1
+			// 
+			this->pictureBox1->Location = System::Drawing::Point(12, 56);
+			this->pictureBox1->Name = L"pictureBox1";
+			this->pictureBox1->Size = System::Drawing::Size(275, 216);
+			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+			this->pictureBox1->TabIndex = 18;
+			this->pictureBox1->TabStop = false;
+			// 
+			// button1
+			// 
+			this->button1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(156)),
+				static_cast<System::Int32>(static_cast<System::Byte>(48)));
+			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button1->Location = System::Drawing::Point(11, 278);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(276, 36);
+			this->button1->TabIndex = 19;
+			this->button1->Text = L"open";
+			this->button1->UseVisualStyleBackColor = false;
+			this->button1->Click += gcnew System::EventHandler(this, &uploadForm::button1_Click);
+			// 
+			// ofd
+			// 
+			this->ofd->Filter = L"\"JPEG|*.jpg|All Files|*.*\"";
+			// 
+			// dateTimePicker1
+			// 
+			this->dateTimePicker1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7));
+			this->dateTimePicker1->Location = System::Drawing::Point(392, 55);
+			this->dateTimePicker1->Name = L"dateTimePicker1";
+			this->dateTimePicker1->Size = System::Drawing::Size(200, 21);
+			this->dateTimePicker1->TabIndex = 20;
 			// 
 			// uploadForm
 			// 
@@ -166,12 +189,13 @@ namespace LOCKER {
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(244)),
 				static_cast<System::Int32>(static_cast<System::Byte>(235)));
 			this->ClientSize = System::Drawing::Size(624, 384);
+			this->Controls->Add(this->dateTimePicker1);
+			this->Controls->Add(this->button1);
+			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->textBox1);
-			this->Controls->Add(this->panel4);
-			this->Controls->Add(this->panel3);
 			this->Controls->Add(this->panel2);
 			this->Controls->Add(this->panel1);
-			this->Font = (gcnew System::Drawing::Font(L"Fira Code", 12));
+			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Margin = System::Windows::Forms::Padding(5, 6, 5, 6);
 			this->Name = L"uploadForm";
@@ -179,11 +203,17 @@ namespace LOCKER {
 			this->Text = L"uploadForm";
 			this->panel1->ResumeLayout(false);
 			this->panel2->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
+
+		array<String^>^ files;
+		String^ path;
+		int currentIndex;
+
 	public: bool backToHome = false;
 	private: System::Void cancelButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		backToHome = true;
@@ -195,5 +225,21 @@ namespace LOCKER {
 		backToHome = true;
 		this->Close();
 	}
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (ofd->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+		pictureBox1->ImageLocation = ofd->FileName;
+		path = System::IO::Path::GetDirectoryName(ofd->FileName);
+		files = System::IO::Directory::GetFiles(path);
+
+		for (int i = 0; i < files->Length; i++)
+		{
+			if (files[i] == ofd->FileName)
+			{
+				currentIndex = i;
+				break;
+			}
+		}
+	}
+}
 };
 }
