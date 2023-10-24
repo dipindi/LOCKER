@@ -1,7 +1,10 @@
 #include "Users.h"
-#include <fstream>
+#include <filesystem>
+
+namespace fs = std::filesystem;
 
 std::vector<loginCredentials> users;
+std::string currentUser;
 
 void getCredentials(const std::string& filename) {
 	std::ifstream file(filename);
@@ -28,13 +31,20 @@ void addCredentials(System::String^ username, System::String^ password) {
 
 	std::ofstream file("users.txt", std::ios::app);
 
+	// creates a folder named after the username
+	std::string folderName = fs::current_path().string() + "\\UserFolders\\" + newUser.username;
+	if (!fs::exists(folderName)) {
+		fs::create_directory(folderName);
+	}
+	
 	// adds username and password in users.txt
 	if (file.is_open()) {
 		file << newUser.username << " " << newUser.password << std::endl;
 		file.close();
 	}
-	// create folder directory under [username]
-	//
-	// implementation here
-	//
+};
+
+void setCurrentUser(System::String^ username) {
+	// pa fix neto
+	currentUser = msclr::interop::marshal_as<std::string>(username);
 };

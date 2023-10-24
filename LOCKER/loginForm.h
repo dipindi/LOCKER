@@ -184,6 +184,7 @@ namespace LOCKER {
 		bool auth = checkCredentials(username, password);
 
 		if (auth) {
+			setCurrentUser(username);
 			openHome = true;
 			this->Close();
 		}

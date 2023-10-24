@@ -9,24 +9,15 @@ namespace LOCKER {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	/// <summary>
-	/// Summary for uploadForm
-	/// </summary>
 	public ref class uploadForm : public System::Windows::Forms::Form
 	{
 	public:
 		uploadForm(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
 		}
 
 	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
 		~uploadForm()
 		{
 			if (components)
@@ -47,8 +38,10 @@ namespace LOCKER {
 
 
 	private: System::Windows::Forms::OpenFileDialog^ ofd;
-	private: System::Windows::Forms::DateTimePicker^ dateTimePicker1;
+
 	private: System::Windows::Forms::Button^ uploadButton;
+	private: System::Windows::Forms::ComboBox^ monthMenu;
+	private: System::Windows::Forms::ComboBox^ yearMenu;
 
 
 
@@ -56,16 +49,9 @@ namespace LOCKER {
 
 
 	private:
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
 		void InitializeComponent(void)
 		{
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
@@ -77,7 +63,8 @@ namespace LOCKER {
 			this->imageUpload = (gcnew System::Windows::Forms::PictureBox());
 			this->uploadButton = (gcnew System::Windows::Forms::Button());
 			this->ofd = (gcnew System::Windows::Forms::OpenFileDialog());
-			this->dateTimePicker1 = (gcnew System::Windows::Forms::DateTimePicker());
+			this->monthMenu = (gcnew System::Windows::Forms::ComboBox());
+			this->yearMenu = (gcnew System::Windows::Forms::ComboBox());
 			this->panel1->SuspendLayout();
 			this->panel2->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imageUpload))->BeginInit();
@@ -128,7 +115,7 @@ namespace LOCKER {
 			this->richTextBox1->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->richTextBox1->Location = System::Drawing::Point(1, 1);
 			this->richTextBox1->Name = L"richTextBox1";
-			this->richTextBox1->Size = System::Drawing::Size(278, 152);
+			this->richTextBox1->Size = System::Drawing::Size(278, 189);
 			this->richTextBox1->TabIndex = 3;
 			this->richTextBox1->Text = L"";
 			// 
@@ -137,9 +124,9 @@ namespace LOCKER {
 			this->panel2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)), static_cast<System::Int32>(static_cast<System::Byte>(100)),
 				static_cast<System::Int32>(static_cast<System::Byte>(100)));
 			this->panel2->Controls->Add(this->richTextBox1);
-			this->panel2->Location = System::Drawing::Point(312, 134);
+			this->panel2->Location = System::Drawing::Point(311, 97);
 			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(280, 154);
+			this->panel2->Size = System::Drawing::Size(280, 191);
 			this->panel2->TabIndex = 4;
 			// 
 			// textBox1
@@ -147,17 +134,18 @@ namespace LOCKER {
 			this->textBox1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(156)),
 				static_cast<System::Int32>(static_cast<System::Byte>(48)));
 			this->textBox1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->textBox1->Location = System::Drawing::Point(313, 82);
+			this->textBox1->Location = System::Drawing::Point(312, 63);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(278, 28);
+			this->textBox1->Size = System::Drawing::Size(280, 28);
 			this->textBox1->TabIndex = 17;
 			// 
 			// imageUpload
 			// 
-			this->imageUpload->BackColor = System::Drawing::Color::Transparent;
-			this->imageUpload->Location = System::Drawing::Point(32, 31);
+			this->imageUpload->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(244)),
+				static_cast<System::Int32>(static_cast<System::Byte>(235)));
+			this->imageUpload->Location = System::Drawing::Point(33, 33);
 			this->imageUpload->Name = L"imageUpload";
-			this->imageUpload->Size = System::Drawing::Size(256, 256);
+			this->imageUpload->Size = System::Drawing::Size(254, 254);
 			this->imageUpload->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->imageUpload->TabIndex = 18;
 			this->imageUpload->TabStop = false;
@@ -167,13 +155,12 @@ namespace LOCKER {
 			this->uploadButton->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(244)),
 				static_cast<System::Int32>(static_cast<System::Byte>(235)));
 			this->uploadButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->uploadButton->Font = (gcnew System::Drawing::Font(L"Fira Code Light", 71.99999F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->uploadButton->Location = System::Drawing::Point(33, 32);
+			this->uploadButton->Font = (gcnew System::Drawing::Font(L"Fira Code Light", 12));
+			this->uploadButton->Location = System::Drawing::Point(32, 32);
 			this->uploadButton->Name = L"uploadButton";
-			this->uploadButton->Size = System::Drawing::Size(254, 254);
+			this->uploadButton->Size = System::Drawing::Size(256, 256);
 			this->uploadButton->TabIndex = 19;
-			this->uploadButton->Text = L"+";
+			this->uploadButton->Text = L"select image";
 			this->uploadButton->UseVisualStyleBackColor = false;
 			this->uploadButton->Click += gcnew System::EventHandler(this, &uploadForm::uploadButton_Click);
 			// 
@@ -181,13 +168,33 @@ namespace LOCKER {
 			// 
 			this->ofd->Filter = L"\"JPEG|*.jpg|All Files|*.*\"";
 			// 
-			// dateTimePicker1
+			// monthMenu
 			// 
-			this->dateTimePicker1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7));
-			this->dateTimePicker1->Location = System::Drawing::Point(392, 55);
-			this->dateTimePicker1->Name = L"dateTimePicker1";
-			this->dateTimePicker1->Size = System::Drawing::Size(200, 18);
-			this->dateTimePicker1->TabIndex = 20;
+			this->monthMenu->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(156)),
+				static_cast<System::Int32>(static_cast<System::Byte>(48)));
+			this->monthMenu->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->monthMenu->Font = (gcnew System::Drawing::Font(L"Fira Code", 8));
+			this->monthMenu->FormattingEnabled = true;
+			this->monthMenu->Location = System::Drawing::Point(409, 32);
+			this->monthMenu->Name = L"monthMenu";
+			this->monthMenu->RightToLeft = System::Windows::Forms::RightToLeft::No;
+			this->monthMenu->Size = System::Drawing::Size(88, 25);
+			this->monthMenu->TabIndex = 21;
+			this->monthMenu->Text = L"  month";
+			// 
+			// yearMenu
+			// 
+			this->yearMenu->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(156)),
+				static_cast<System::Int32>(static_cast<System::Byte>(48)));
+			this->yearMenu->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->yearMenu->Font = (gcnew System::Drawing::Font(L"Fira Code", 8));
+			this->yearMenu->FormattingEnabled = true;
+			this->yearMenu->Location = System::Drawing::Point(503, 32);
+			this->yearMenu->Name = L"yearMenu";
+			this->yearMenu->RightToLeft = System::Windows::Forms::RightToLeft::No;
+			this->yearMenu->Size = System::Drawing::Size(88, 25);
+			this->yearMenu->TabIndex = 22;
+			this->yearMenu->Text = L"   year";
 			// 
 			// uploadForm
 			// 
@@ -195,7 +202,8 @@ namespace LOCKER {
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(244)),
 				static_cast<System::Int32>(static_cast<System::Byte>(235)));
 			this->ClientSize = System::Drawing::Size(624, 384);
-			this->Controls->Add(this->dateTimePicker1);
+			this->Controls->Add(this->yearMenu);
+			this->Controls->Add(this->monthMenu);
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->panel2);
 			this->Controls->Add(this->panel1);

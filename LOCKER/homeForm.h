@@ -1,5 +1,6 @@
 #pragma once
 #include "Users.h"
+#include "loginForm.h"
 
 namespace LOCKER {
 
@@ -26,47 +27,53 @@ namespace LOCKER {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::PictureBox^ pictureBox1;
+	private: System::Windows::Forms::PictureBox^ headerImage;
+	private: System::Windows::Forms::PictureBox^ logoutButton;
 	protected:
-	private: System::Windows::Forms::PictureBox^ pictureBox2;
+
+	protected:
+
 	private: System::Windows::Forms::Button^ uploadButton;
+	private: System::Windows::Forms::Label^ greeting;
 
 
 	private:
 		System::ComponentModel::Container ^components;
+	private: 
 
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(homeForm::typeid));
-			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
-			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
+			this->headerImage = (gcnew System::Windows::Forms::PictureBox());
+			this->logoutButton = (gcnew System::Windows::Forms::PictureBox());
 			this->uploadButton = (gcnew System::Windows::Forms::Button());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
+			this->greeting = (gcnew System::Windows::Forms::Label());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->headerImage))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->logoutButton))->BeginInit();
 			this->SuspendLayout();
 			// 
-			// pictureBox1
+			// headerImage
 			// 
-			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(0, 0);
-			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(624, 64);
-			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::AutoSize;
-			this->pictureBox1->TabIndex = 0;
-			this->pictureBox1->TabStop = false;
+			this->headerImage->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"headerImage.Image")));
+			this->headerImage->Location = System::Drawing::Point(0, 0);
+			this->headerImage->Name = L"headerImage";
+			this->headerImage->Size = System::Drawing::Size(624, 64);
+			this->headerImage->SizeMode = System::Windows::Forms::PictureBoxSizeMode::AutoSize;
+			this->headerImage->TabIndex = 0;
+			this->headerImage->TabStop = false;
 			// 
-			// pictureBox2
+			// logoutButton
 			// 
-			this->pictureBox2->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->pictureBox2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox2.Image")));
-			this->pictureBox2->Location = System::Drawing::Point(560, 0);
-			this->pictureBox2->Name = L"pictureBox2";
-			this->pictureBox2->Size = System::Drawing::Size(64, 64);
-			this->pictureBox2->SizeMode = System::Windows::Forms::PictureBoxSizeMode::AutoSize;
-			this->pictureBox2->TabIndex = 1;
-			this->pictureBox2->TabStop = false;
-			this->pictureBox2->Click += gcnew System::EventHandler(this, &homeForm::pictureBox2_Click);
+			this->logoutButton->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->logoutButton->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"logoutButton.Image")));
+			this->logoutButton->Location = System::Drawing::Point(560, 0);
+			this->logoutButton->Name = L"logoutButton";
+			this->logoutButton->Size = System::Drawing::Size(64, 64);
+			this->logoutButton->SizeMode = System::Windows::Forms::PictureBoxSizeMode::AutoSize;
+			this->logoutButton->TabIndex = 1;
+			this->logoutButton->TabStop = false;
+			this->logoutButton->Click += gcnew System::EventHandler(this, &homeForm::logoutButton_Click);
 			// 
 			// uploadButton
 			// 
@@ -81,30 +88,40 @@ namespace LOCKER {
 			this->uploadButton->UseVisualStyleBackColor = false;
 			this->uploadButton->Click += gcnew System::EventHandler(this, &homeForm::uploadButton_Click);
 			// 
+			// greeting
+			// 
+			this->greeting->AutoSize = true;
+			this->greeting->Location = System::Drawing::Point(110, 79);
+			this->greeting->Name = L"greeting";
+			this->greeting->Size = System::Drawing::Size(142, 25);
+			this->greeting->TabIndex = 4;
+			this->greeting->Text = L"Hello, [user]";
+			// 
 			// homeForm
 			// 
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(244)),
 				static_cast<System::Int32>(static_cast<System::Byte>(235)));
 			this->ClientSize = System::Drawing::Size(624, 703);
+			this->Controls->Add(this->greeting);
 			this->Controls->Add(this->uploadButton);
-			this->Controls->Add(this->pictureBox2);
-			this->Controls->Add(this->pictureBox1);
+			this->Controls->Add(this->logoutButton);
+			this->Controls->Add(this->headerImage);
 			this->Font = (gcnew System::Drawing::Font(L"Fira Code", 12));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Margin = System::Windows::Forms::Padding(5, 6, 5, 6);
 			this->Name = L"homeForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"MyForm";
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->headerImage))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->logoutButton))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
 	public: bool signOff = false;
-	private: System::Void pictureBox2_Click(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void logoutButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		signOff = true;
 		this->Close();
 	}

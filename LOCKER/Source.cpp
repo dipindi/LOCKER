@@ -10,7 +10,6 @@
 using namespace System;
 using namespace System::Windows::Forms;
 
-
 // Window Switching Functions
 void startLocker();
 void regisWindow();

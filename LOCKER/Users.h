@@ -11,9 +11,11 @@ struct loginCredentials {
 };
 
 extern std::vector<loginCredentials> users;
+extern std::string currentUser;
 
 void getCredentials(const std::string& filename);
 bool checkCredentials(System::String^ username, System::String^ password);
 void addCredentials(System::String^ username, System::String^ password);
+void setCurrentUser(System::String^ username);
 
 #endif
