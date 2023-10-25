@@ -27,13 +27,15 @@ namespace LOCKER {
 		}
 	private: System::Windows::Forms::Panel^ panel1;
 	private: System::Windows::Forms::Button^ confirmButton;
-	private: System::Windows::Forms::RichTextBox^ richTextBox1;
+	private: System::Windows::Forms::RichTextBox^ descBox;
+
 
 	private: System::Windows::Forms::Button^ cancelButton;
 	private: System::Windows::Forms::Panel^ panel2;
+	private: System::Windows::Forms::TextBox^ titleBox;
 
 
-	private: System::Windows::Forms::TextBox^ textBox1;
+
 	private: System::Windows::Forms::PictureBox^ imageUpload;
 
 
@@ -42,8 +44,12 @@ namespace LOCKER {
 	private: System::Windows::Forms::Button^ uploadButton;
 	private: System::Windows::Forms::ComboBox^ monthMenu;
 	private: System::Windows::Forms::ComboBox^ yearMenu;
-	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::Label^ titleLabel;
+
+	private: System::Windows::Forms::Label^ descLabel;
+
+
+
 
 
 
@@ -62,16 +68,16 @@ namespace LOCKER {
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->cancelButton = (gcnew System::Windows::Forms::Button());
 			this->confirmButton = (gcnew System::Windows::Forms::Button());
-			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
+			this->descBox = (gcnew System::Windows::Forms::RichTextBox());
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->titleBox = (gcnew System::Windows::Forms::TextBox());
 			this->imageUpload = (gcnew System::Windows::Forms::PictureBox());
 			this->uploadButton = (gcnew System::Windows::Forms::Button());
 			this->ofd = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->monthMenu = (gcnew System::Windows::Forms::ComboBox());
 			this->yearMenu = (gcnew System::Windows::Forms::ComboBox());
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->titleLabel = (gcnew System::Windows::Forms::Label());
+			this->descLabel = (gcnew System::Windows::Forms::Label());
 			this->panel1->SuspendLayout();
 			this->panel2->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imageUpload))->BeginInit();
@@ -115,43 +121,42 @@ namespace LOCKER {
 			this->confirmButton->UseVisualStyleBackColor = false;
 			this->confirmButton->Click += gcnew System::EventHandler(this, &uploadForm::confirmButton_Click);
 			// 
-			// richTextBox1
+			// descBox
 			// 
-			this->richTextBox1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(156)),
+			this->descBox->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(156)),
 				static_cast<System::Int32>(static_cast<System::Byte>(48)));
-			this->richTextBox1->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			this->richTextBox1->Location = System::Drawing::Point(1, 1);
-			this->richTextBox1->Name = L"richTextBox1";
-			this->richTextBox1->Size = System::Drawing::Size(278, 165);
-			this->richTextBox1->TabIndex = 3;
-			this->richTextBox1->Text = L"";
+			this->descBox->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->descBox->Location = System::Drawing::Point(1, 1);
+			this->descBox->Name = L"descBox";
+			this->descBox->Size = System::Drawing::Size(278, 165);
+			this->descBox->TabIndex = 3;
+			this->descBox->Text = L"";
 			// 
 			// panel2
 			// 
 			this->panel2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)), static_cast<System::Int32>(static_cast<System::Byte>(100)),
 				static_cast<System::Int32>(static_cast<System::Byte>(100)));
-			this->panel2->Controls->Add(this->richTextBox1);
+			this->panel2->Controls->Add(this->descBox);
 			this->panel2->Location = System::Drawing::Point(311, 118);
 			this->panel2->Name = L"panel2";
 			this->panel2->Size = System::Drawing::Size(280, 167);
 			this->panel2->TabIndex = 4;
 			// 
-			// textBox1
+			// titleBox
 			// 
-			this->textBox1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(156)),
+			this->titleBox->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(156)),
 				static_cast<System::Int32>(static_cast<System::Byte>(48)));
-			this->textBox1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->textBox1->Location = System::Drawing::Point(312, 63);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(280, 28);
-			this->textBox1->TabIndex = 17;
-			this->textBox1->TextChanged += gcnew System::EventHandler(this, &uploadForm::textBox1_TextChanged);
+			this->titleBox->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->titleBox->Location = System::Drawing::Point(312, 63);
+			this->titleBox->Name = L"titleBox";
+			this->titleBox->Size = System::Drawing::Size(280, 28);
+			this->titleBox->TabIndex = 17;
 			// 
 			// imageUpload
 			// 
 			this->imageUpload->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(244)),
 				static_cast<System::Int32>(static_cast<System::Byte>(235)));
-			this->imageUpload->Location = System::Drawing::Point(33, 33);
+			this->imageUpload->Location = System::Drawing::Point(34, 34);
 			this->imageUpload->Name = L"imageUpload";
 			this->imageUpload->Size = System::Drawing::Size(254, 254);
 			this->imageUpload->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
@@ -213,38 +218,28 @@ namespace LOCKER {
 			this->yearMenu->TabIndex = 22;
 			this->yearMenu->Text = L" year";
 			// 
-			// label1
+			// titleLabel
 			// 
-			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Fira Code", 7));
-			this->label1->ForeColor = System::Drawing::SystemColors::ControlDarkDark;
-			this->label1->Location = System::Drawing::Point(308, 41);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(44, 19);
-			this->label1->TabIndex = 23;
-			this->label1->Text = L"#0000";
-			// 
-			// label1
-			// 
-			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"PP Agrandir Text", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->titleLabel->AutoSize = true;
+			this->titleLabel->Font = (gcnew System::Drawing::Font(L"PP Agrandir Text", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(308, 36);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(53, 21);
-			this->label1->TabIndex = 23;
-			this->label1->Text = L"TITLE";
+			this->titleLabel->ForeColor = System::Drawing::SystemColors::ControlText;
+			this->titleLabel->Location = System::Drawing::Point(308, 36);
+			this->titleLabel->Name = L"titleLabel";
+			this->titleLabel->Size = System::Drawing::Size(53, 21);
+			this->titleLabel->TabIndex = 23;
+			this->titleLabel->Text = L"TITLE";
 			// 
-			// label2
+			// descLabel
 			// 
-			this->label2->AutoSize = true;
-			this->label2->Font = (gcnew System::Drawing::Font(L"PP Agrandir Text", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->descLabel->AutoSize = true;
+			this->descLabel->Font = (gcnew System::Drawing::Font(L"PP Agrandir Text", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label2->Location = System::Drawing::Point(308, 94);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(120, 21);
-			this->label2->TabIndex = 24;
-			this->label2->Text = L"DESCRIPTION";
+			this->descLabel->Location = System::Drawing::Point(308, 94);
+			this->descLabel->Name = L"descLabel";
+			this->descLabel->Size = System::Drawing::Size(120, 21);
+			this->descLabel->TabIndex = 24;
+			this->descLabel->Text = L"DESCRIPTION";
 			// 
 			// uploadForm
 			// 
@@ -252,11 +247,11 @@ namespace LOCKER {
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(244)),
 				static_cast<System::Int32>(static_cast<System::Byte>(235)));
 			this->ClientSize = System::Drawing::Size(624, 384);
-			this->Controls->Add(this->label2);
-			this->Controls->Add(this->label1);
+			this->Controls->Add(this->descLabel);
+			this->Controls->Add(this->titleLabel);
 			this->Controls->Add(this->yearMenu);
 			this->Controls->Add(this->monthMenu);
-			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->titleBox);
 			this->Controls->Add(this->panel2);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->uploadButton);
@@ -308,9 +303,5 @@ namespace LOCKER {
 		}
 		imageUpload->BringToFront();
 	}
-
-private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-	label1->Text = "#0001";
-}
 };
 }

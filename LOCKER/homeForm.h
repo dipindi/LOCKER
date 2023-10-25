@@ -95,7 +95,7 @@ namespace LOCKER {
 			this->greeting->Name = L"greeting";
 			this->greeting->Size = System::Drawing::Size(142, 25);
 			this->greeting->TabIndex = 4;
-			this->greeting->Text = L"Hello, [user]";
+			this->greeting->Text = L"Hello, ";
 			// 
 			// homeForm
 			// 

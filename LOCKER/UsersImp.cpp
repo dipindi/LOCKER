@@ -3,8 +3,8 @@
 
 namespace fs = std::filesystem;
 
-std::vector<loginCredentials> users;
-std::string currentUser;
+extern std::vector<loginCredentials> users;
+extern std::string currUser;
 
 void getCredentials(const std::string& filename) {
 	std::ifstream file(filename);
@@ -28,8 +28,7 @@ void addCredentials(System::String^ username, System::String^ password) {
 	loginCredentials newUser;
 	newUser.username = msclr::interop::marshal_as<std::string>(username);
 	newUser.password = msclr::interop::marshal_as<std::string>(password);
-
-	std::ofstream file("users.txt", std::ios::app);
+	newUser.numEntries = 0;
 
 	// creates a folder named after the username
 	std::string folderName = fs::current_path().string() + "\\UserFolders\\" + newUser.username;
@@ -46,14 +45,16 @@ void addCredentials(System::String^ username, System::String^ password) {
 	}
 
 	// adds username and password in users.txt
+	std::ofstream file("users.txt", std::ios::app);
 	if (file.is_open()) {
 		file << newUser.username << " " << newUser.password << std::endl;
 		file.close();
 	}
 }
 
-void setCurrentUser(System::String^ username) {
-	// pa fix neto
-	currentUser = msclr::interop::marshal_as<std::string>(username);
+// NOT WORKING
+std::string setCurrentUser(System::String^ username) {
+	std::string currUser = msclr::interop::marshal_as<std::string>(username);
+	return currUser;
 }
 
