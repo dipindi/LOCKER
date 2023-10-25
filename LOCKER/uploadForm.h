@@ -42,6 +42,9 @@ namespace LOCKER {
 	private: System::Windows::Forms::Button^ uploadButton;
 	private: System::Windows::Forms::ComboBox^ monthMenu;
 	private: System::Windows::Forms::ComboBox^ yearMenu;
+	private: System::Windows::Forms::Label^ label1;
+
+
 
 
 
@@ -66,6 +69,7 @@ namespace LOCKER {
 			this->ofd = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->monthMenu = (gcnew System::Windows::Forms::ComboBox());
 			this->yearMenu = (gcnew System::Windows::Forms::ComboBox());
+			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->panel1->SuspendLayout();
 			this->panel2->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imageUpload))->BeginInit();
@@ -139,6 +143,7 @@ namespace LOCKER {
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(280, 34);
 			this->textBox1->TabIndex = 17;
+			this->textBox1->TextChanged += gcnew System::EventHandler(this, &uploadForm::textBox1_TextChanged);
 			// 
 			// imageUpload
 			// 
@@ -157,7 +162,7 @@ namespace LOCKER {
 				static_cast<System::Int32>(static_cast<System::Byte>(235)));
 			this->uploadButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->uploadButton->Font = (gcnew System::Drawing::Font(L"Fira Code Light", 12));
-			this->uploadButton->Location = System::Drawing::Point(32, 32);
+			this->uploadButton->Location = System::Drawing::Point(33, 33);
 			this->uploadButton->Name = L"uploadButton";
 			this->uploadButton->Size = System::Drawing::Size(256, 256);
 			this->uploadButton->TabIndex = 19;
@@ -206,12 +211,24 @@ namespace LOCKER {
 			this->yearMenu->TabIndex = 22;
 			this->yearMenu->Text = L" year";
 			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Fira Code", 7));
+			this->label1->ForeColor = System::Drawing::SystemColors::ControlDarkDark;
+			this->label1->Location = System::Drawing::Point(308, 41);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(44, 19);
+			this->label1->TabIndex = 23;
+			this->label1->Text = L"#0000";
+			// 
 			// uploadForm
 			// 
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(244)),
 				static_cast<System::Int32>(static_cast<System::Byte>(235)));
 			this->ClientSize = System::Drawing::Size(624, 384);
+			this->Controls->Add(this->label1);
 			this->Controls->Add(this->yearMenu);
 			this->Controls->Add(this->monthMenu);
 			this->Controls->Add(this->textBox1);
@@ -266,5 +283,9 @@ namespace LOCKER {
 		}
 		imageUpload->BringToFront();
 	}
+
+private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+	label1->Text = "#0001";
+}
 };
 }
