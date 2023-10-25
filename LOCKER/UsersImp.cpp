@@ -13,7 +13,7 @@ void getCredentials(const std::string& filename) {
 		users.push_back(user);
 	}
 	file.close();
-};
+}
 
 bool checkCredentials(System::String^ username, System::String^ password) {
 	for (const auto& user : users) {
@@ -22,7 +22,7 @@ bool checkCredentials(System::String^ username, System::String^ password) {
 		}
 	}
 	return false;
-};
+}
 
 void addCredentials(System::String^ username, System::String^ password) {
 	loginCredentials newUser;
@@ -36,15 +36,24 @@ void addCredentials(System::String^ username, System::String^ password) {
 	if (!fs::exists(folderName)) {
 		fs::create_directories(folderName);
 	}
-	
+
+	// Create numberOfEntries.txt file
+	std::string entriesFile = folderName + "\\numberOfEntries.txt";
+	std::ofstream entriesFileHandler(entriesFile, std::ios::trunc);
+	if (entriesFileHandler.is_open()) {
+		entriesFileHandler << "0";
+		entriesFileHandler.close();
+	}
+
 	// adds username and password in users.txt
 	if (file.is_open()) {
 		file << newUser.username << " " << newUser.password << std::endl;
 		file.close();
 	}
-};
+}
 
 void setCurrentUser(System::String^ username) {
 	// pa fix neto
 	currentUser = msclr::interop::marshal_as<std::string>(username);
-};
+}
+
