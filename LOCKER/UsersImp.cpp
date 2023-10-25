@@ -34,7 +34,7 @@ void addCredentials(System::String^ username, System::String^ password) {
 	// creates a folder named after the username
 	std::string folderName = fs::current_path().string() + "\\UserFolders\\" + newUser.username;
 	if (!fs::exists(folderName)) {
-		fs::create_directory(folderName);
+		fs::create_directories(folderName);
 	}
 	
 	// adds username and password in users.txt

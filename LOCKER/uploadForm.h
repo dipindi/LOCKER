@@ -45,6 +45,7 @@ namespace LOCKER {
 
 
 
+
 	protected:
 
 
@@ -100,9 +101,9 @@ namespace LOCKER {
 			this->confirmButton->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(235)),
 				static_cast<System::Int32>(static_cast<System::Byte>(124)));
 			this->confirmButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->confirmButton->Location = System::Drawing::Point(516, 13);
+			this->confirmButton->Location = System::Drawing::Point(503, 13);
 			this->confirmButton->Name = L"confirmButton";
-			this->confirmButton->Size = System::Drawing::Size(96, 39);
+			this->confirmButton->Size = System::Drawing::Size(109, 39);
 			this->confirmButton->TabIndex = 13;
 			this->confirmButton->Text = L"confirm";
 			this->confirmButton->UseVisualStyleBackColor = false;
@@ -136,7 +137,7 @@ namespace LOCKER {
 			this->textBox1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->textBox1->Location = System::Drawing::Point(312, 63);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(280, 28);
+			this->textBox1->Size = System::Drawing::Size(280, 34);
 			this->textBox1->TabIndex = 17;
 			// 
 			// imageUpload
@@ -175,12 +176,16 @@ namespace LOCKER {
 			this->monthMenu->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->monthMenu->Font = (gcnew System::Drawing::Font(L"Fira Code", 8));
 			this->monthMenu->FormattingEnabled = true;
+			this->monthMenu->Items->AddRange(gcnew cli::array< System::Object^  >(12) {
+				L"January", L"February", L"March", L"April", L"May",
+					L"June", L"July", L"August", L"September", L"October", L"November", L"December"
+			});
 			this->monthMenu->Location = System::Drawing::Point(409, 32);
 			this->monthMenu->Name = L"monthMenu";
 			this->monthMenu->RightToLeft = System::Windows::Forms::RightToLeft::No;
-			this->monthMenu->Size = System::Drawing::Size(88, 25);
+			this->monthMenu->Size = System::Drawing::Size(88, 29);
 			this->monthMenu->TabIndex = 21;
-			this->monthMenu->Text = L"  month";
+			this->monthMenu->Text = L" month";
 			// 
 			// yearMenu
 			// 
@@ -189,12 +194,17 @@ namespace LOCKER {
 			this->yearMenu->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->yearMenu->Font = (gcnew System::Drawing::Font(L"Fira Code", 8));
 			this->yearMenu->FormattingEnabled = true;
+			this->yearMenu->Items->AddRange(gcnew cli::array< System::Object^  >(26) {
+				L"1998", L"1999", L"2000", L"2001", L"2002", L"2003",
+					L"2004", L"2005", L"2006", L"2007", L"2008", L"2009", L"2010", L"2011", L"2012", L"2013", L"2014", L"2015", L"2016", L"2017",
+					L"2018", L"2019", L"2020", L"2021", L"2022", L"2023"
+			});
 			this->yearMenu->Location = System::Drawing::Point(503, 32);
 			this->yearMenu->Name = L"yearMenu";
 			this->yearMenu->RightToLeft = System::Windows::Forms::RightToLeft::No;
-			this->yearMenu->Size = System::Drawing::Size(88, 25);
+			this->yearMenu->Size = System::Drawing::Size(88, 29);
 			this->yearMenu->TabIndex = 22;
-			this->yearMenu->Text = L"   year";
+			this->yearMenu->Text = L" year";
 			// 
 			// uploadForm
 			// 
