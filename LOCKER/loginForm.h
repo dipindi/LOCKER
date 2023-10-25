@@ -177,6 +177,7 @@ namespace LOCKER {
 
 #pragma endregion
 	public: bool openHome = false;
+	public: String^ currentUser;
 	private: System::Void signinButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ username = this->usernameBox->Text;
 		String^ password = this->passwordBox->Text;
@@ -184,7 +185,6 @@ namespace LOCKER {
 		bool auth = checkCredentials(username, password);
 
 		if (auth) {
-			setCurrentUser(username);
 			openHome = true;
 			this->Close();
 		}

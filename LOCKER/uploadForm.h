@@ -42,6 +42,8 @@ namespace LOCKER {
 	private: System::Windows::Forms::Button^ uploadButton;
 	private: System::Windows::Forms::ComboBox^ monthMenu;
 	private: System::Windows::Forms::ComboBox^ yearMenu;
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ label2;
 
 
 
@@ -66,6 +68,8 @@ namespace LOCKER {
 			this->ofd = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->monthMenu = (gcnew System::Windows::Forms::ComboBox());
 			this->yearMenu = (gcnew System::Windows::Forms::ComboBox());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->panel1->SuspendLayout();
 			this->panel2->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imageUpload))->BeginInit();
@@ -116,7 +120,7 @@ namespace LOCKER {
 			this->richTextBox1->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->richTextBox1->Location = System::Drawing::Point(1, 1);
 			this->richTextBox1->Name = L"richTextBox1";
-			this->richTextBox1->Size = System::Drawing::Size(278, 189);
+			this->richTextBox1->Size = System::Drawing::Size(278, 165);
 			this->richTextBox1->TabIndex = 3;
 			this->richTextBox1->Text = L"";
 			// 
@@ -125,9 +129,9 @@ namespace LOCKER {
 			this->panel2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(100)), static_cast<System::Int32>(static_cast<System::Byte>(100)),
 				static_cast<System::Int32>(static_cast<System::Byte>(100)));
 			this->panel2->Controls->Add(this->richTextBox1);
-			this->panel2->Location = System::Drawing::Point(311, 97);
+			this->panel2->Location = System::Drawing::Point(311, 118);
 			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(280, 191);
+			this->panel2->Size = System::Drawing::Size(280, 167);
 			this->panel2->TabIndex = 4;
 			// 
 			// textBox1
@@ -137,7 +141,7 @@ namespace LOCKER {
 			this->textBox1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->textBox1->Location = System::Drawing::Point(312, 63);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(280, 34);
+			this->textBox1->Size = System::Drawing::Size(280, 28);
 			this->textBox1->TabIndex = 17;
 			// 
 			// imageUpload
@@ -183,7 +187,7 @@ namespace LOCKER {
 			this->monthMenu->Location = System::Drawing::Point(409, 32);
 			this->monthMenu->Name = L"monthMenu";
 			this->monthMenu->RightToLeft = System::Windows::Forms::RightToLeft::No;
-			this->monthMenu->Size = System::Drawing::Size(88, 29);
+			this->monthMenu->Size = System::Drawing::Size(88, 25);
 			this->monthMenu->TabIndex = 21;
 			this->monthMenu->Text = L" month";
 			// 
@@ -202,9 +206,31 @@ namespace LOCKER {
 			this->yearMenu->Location = System::Drawing::Point(503, 32);
 			this->yearMenu->Name = L"yearMenu";
 			this->yearMenu->RightToLeft = System::Windows::Forms::RightToLeft::No;
-			this->yearMenu->Size = System::Drawing::Size(88, 29);
+			this->yearMenu->Size = System::Drawing::Size(88, 25);
 			this->yearMenu->TabIndex = 22;
 			this->yearMenu->Text = L" year";
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"PP Agrandir Text", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label1->Location = System::Drawing::Point(308, 36);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(53, 21);
+			this->label1->TabIndex = 23;
+			this->label1->Text = L"TITLE";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Font = (gcnew System::Drawing::Font(L"PP Agrandir Text", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label2->Location = System::Drawing::Point(308, 94);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(120, 21);
+			this->label2->TabIndex = 24;
+			this->label2->Text = L"DESCRIPTION";
 			// 
 			// uploadForm
 			// 
@@ -212,6 +238,8 @@ namespace LOCKER {
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(244)),
 				static_cast<System::Int32>(static_cast<System::Byte>(235)));
 			this->ClientSize = System::Drawing::Size(624, 384);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label1);
 			this->Controls->Add(this->yearMenu);
 			this->Controls->Add(this->monthMenu);
 			this->Controls->Add(this->textBox1);

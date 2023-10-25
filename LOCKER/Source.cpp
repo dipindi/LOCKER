@@ -16,6 +16,8 @@ void regisWindow();
 void homeWindow();
 void uploadWindow();
 
+std::string currUser;
+
 [STAThreadAttribute]
 int main(array<String^>^ args) {
 	Application::EnableVisualStyles();
