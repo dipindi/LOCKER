@@ -5,7 +5,7 @@ namespace fs = std::filesystem;
 
 std::vector<loginCredentials> users;
 extern std::string currUser;
-
+static std::string folderName;
 void getCredentials(const std::string& filename) {
 	std::ifstream file(filename);
 	loginCredentials user;
@@ -31,7 +31,7 @@ void addCredentials(System::String^ username, System::String^ password) {
 	newUser.numEntries = 0;
 
 	// creates a folder named after the username
-	std::string folderName = fs::current_path().string() + "\\UserFolders\\" + newUser.username;
+	folderName = fs::current_path().string() + "\\UserFolders\\" + newUser.username;
 	if (!fs::exists(folderName)) {
 		fs::create_directories(folderName);
 	}
@@ -51,5 +51,3 @@ void addCredentials(System::String^ username, System::String^ password) {
 		file.close();
 	}
 }
-
-// NOT WORKING

@@ -272,10 +272,12 @@ namespace LOCKER {
 #pragma endregion
 
 		array<String^>^ files;
-		String^ path;
+		
 		int currentIndex;
 
 	public: bool backToHome = false;
+	public:      System::String^ path;
+	public:		 System::String^ name;
 	private: System::Void cancelButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		backToHome = true;
 		this->Close();
@@ -283,6 +285,7 @@ namespace LOCKER {
 
 	private: System::Void confirmButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		MessageBox::Show("Entry successfully uploaded");
+		
 		backToHome = true;
 		this->Close();
 	}
@@ -290,6 +293,7 @@ namespace LOCKER {
 		if (ofd->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 			imageUpload->ImageLocation = ofd->FileName;
 			path = System::IO::Path::GetDirectoryName(ofd->FileName);
+			name = ofd->FileName;
 			files = System::IO::Directory::GetFiles(path);
 
 			for (int i = 0; i < files->Length; i++)

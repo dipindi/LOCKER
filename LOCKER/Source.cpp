@@ -3,10 +3,13 @@
 #include "registerForm.h"
 #include "homeForm.h"
 #include "uploadForm.h"
-
+#include <msclr/marshal_cppstd.h>
 // User Handling header file
-#include "Users.h"
-
+#include "Users.h"	
+#include <filesystem>
+#include <ctime>
+#include "json.hpp"
+namespace fs = std::filesystem;
 using namespace System;
 using namespace System::Windows::Forms;
 
@@ -17,6 +20,7 @@ void homeWindow();
 void uploadWindow();
 
 std::string currUser;
+std::string currUserPath = fs::current_path().string() + "\\UserFolders\\" + currUser;
 
 [STAThreadAttribute]
 int main(array<String^>^ args) {
@@ -32,12 +36,15 @@ int main(array<String^>^ args) {
 void startLocker() {
 	LOCKER::loginForm login;
 	Application::Run(% login);
+	
 
 	if (login.openRegis) {
 		regisWindow();
 	}
 
 	if (login.openHome) {
+		System::String^ temp = login.currentUser;
+		currUser = msclr::interop::marshal_as<std::string>(temp);
 		homeWindow();
 	}
 } // end of startLocker
@@ -69,6 +76,14 @@ void uploadWindow() {
 	upload.ShowDialog();
 
 	if (upload.backToHome) {
+		System::String^ imgpath = upload.path;
+		System::String^ imgname = upload.name;
+		std::stringstream timestamp;
+		timestamp << time(NULL);
+		std::string imgpathstr = msclr::interop::marshal_as<std::string>(imgpath);
+		fs::path imgPath = msclr::interop::marshal_as<std::string>(imgname);
+		fs::path destPath = currUserPath + currUser + "\\" + timestamp.str() + ".jpg";
+		fs::copy_file(imgPath, destPath, fs::copy_options::overwrite_existing);
 		homeWindow();
 	}
 } // end of uploadWindow

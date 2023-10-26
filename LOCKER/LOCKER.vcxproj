@@ -79,6 +79,7 @@
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>.</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies />
@@ -135,6 +136,7 @@
     <ClCompile Include="UsersImp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="json.hpp" />
     <ClInclude Include="uploadForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>

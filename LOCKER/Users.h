@@ -14,6 +14,5 @@ struct loginCredentials {
 void getCredentials(const std::string& filename);
 bool checkCredentials(System::String^ username, System::String^ password);
 void addCredentials(System::String^ username, System::String^ password);
-std::string setCurrentUser(System::String^ username); // NOT WORKING
 
 #endif

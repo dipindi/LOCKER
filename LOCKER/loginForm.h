@@ -177,6 +177,7 @@ namespace LOCKER {
 
 #pragma endregion
 	public: bool openHome = false;
+	public: String^ currentUser;
 	private: System::Void signinButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ username = this->usernameBox->Text;
 		String^ password = this->passwordBox->Text;
@@ -187,11 +188,12 @@ namespace LOCKER {
 			openHome = true;
 			this->Close();
 		} else if (auth) {
-			// setCurrentUser(username); // NOT WORKING
+			currentUser = username;
 			openHome = true;
 			this->Close();
 		}
 		else {
+			openHome = false;
 			MessageBox::Show("Username or Password is incorrect");
 		}
 	}
