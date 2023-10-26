@@ -1,18 +1,15 @@
 #ifndef USERS_H
 #define USERS_H
 
-#include <string>
 #include <fstream>
+#include <vector>
 #include <msclr\marshal_cppstd.h>
 
 struct loginCredentials {
 	std::string username;
 	std::string password;
-	std::int16_t numEntries;
+	int numEntries;
 };
-
-extern std::vector<loginCredentials> users;
-extern std::string currUser;
 
 void getCredentials(const std::string& filename);
 bool checkCredentials(System::String^ username, System::String^ password);

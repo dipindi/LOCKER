@@ -3,7 +3,7 @@
 
 namespace fs = std::filesystem;
 
-extern std::vector<loginCredentials> users;
+std::vector<loginCredentials> users;
 extern std::string currUser;
 
 void getCredentials(const std::string& filename) {
@@ -53,8 +53,3 @@ void addCredentials(System::String^ username, System::String^ password) {
 }
 
 // NOT WORKING
-std::string setCurrentUser(System::String^ username) {
-	std::string currUser = msclr::interop::marshal_as<std::string>(username);
-	return currUser;
-}
-
