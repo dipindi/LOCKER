@@ -35,6 +35,11 @@ namespace LOCKER {
 
 	private: System::Windows::Forms::Button^ uploadButton;
 	private: System::Windows::Forms::Label^ greeting;
+	private: System::Windows::Forms::PictureBox^ pictureBox1;
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ button2;
 
 
 	private:
@@ -49,8 +54,14 @@ namespace LOCKER {
 			this->logoutButton = (gcnew System::Windows::Forms::PictureBox());
 			this->uploadButton = (gcnew System::Windows::Forms::Button());
 			this->greeting = (gcnew System::Windows::Forms::Label());
+			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->headerImage))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->logoutButton))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// headerImage
@@ -93,9 +104,54 @@ namespace LOCKER {
 			this->greeting->AutoSize = true;
 			this->greeting->Location = System::Drawing::Point(110, 79);
 			this->greeting->Name = L"greeting";
-			this->greeting->Size = System::Drawing::Size(142, 25);
+			this->greeting->Size = System::Drawing::Size(66, 25);
 			this->greeting->TabIndex = 4;
 			this->greeting->Text = L"Hello, ";
+			// 
+			// pictureBox1
+			// 
+			this->pictureBox1->Location = System::Drawing::Point(188, 228);
+			this->pictureBox1->Name = L"pictureBox1";
+			this->pictureBox1->Size = System::Drawing::Size(259, 323);
+			this->pictureBox1->TabIndex = 5;
+			this->pictureBox1->TabStop = false;
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Location = System::Drawing::Point(287, 575);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(67, 25);
+			this->label1->TabIndex = 6;
+			this->label1->Text = L"TITLE";
+			this->label1->Click += gcnew System::EventHandler(this, &homeForm::label1_Click);
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(279, 618);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(75, 25);
+			this->label2->TabIndex = 7;
+			this->label2->Text = L"caption";
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(130, 620);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(100, 37);
+			this->button1->TabIndex = 8;
+			this->button1->Text = L"previous";
+			this->button1->UseVisualStyleBackColor = true;
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(455, 620);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(75, 37);
+			this->button2->TabIndex = 9;
+			this->button2->Text = L"next";
+			this->button2->UseVisualStyleBackColor = true;
 			// 
 			// homeForm
 			// 
@@ -103,11 +159,16 @@ namespace LOCKER {
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(244)),
 				static_cast<System::Int32>(static_cast<System::Byte>(235)));
 			this->ClientSize = System::Drawing::Size(624, 703);
+			this->Controls->Add(this->button2);
+			this->Controls->Add(this->button1);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->greeting);
 			this->Controls->Add(this->uploadButton);
 			this->Controls->Add(this->logoutButton);
 			this->Controls->Add(this->headerImage);
-			this->Font = (gcnew System::Drawing::Font(L"Fira Code", 12));
+			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Margin = System::Windows::Forms::Padding(5, 6, 5, 6);
 			this->Name = L"homeForm";
@@ -115,21 +176,44 @@ namespace LOCKER {
 			this->Text = L"MyForm";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->headerImage))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->logoutButton))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
 	public: bool signOff = false;
+		  int currentPicture = 1;
 	private: System::Void logoutButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		signOff = true;
 		this->Close();
 	}
 	
 	public: bool openUpload = false;
+	public: bool previous = false;
+	public: bool next = false;
 	private: System::Void uploadButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		openUpload = true;
 		this->Close();
 	}
-	};
+	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void UpdateImage(std::string filepath) {
+		System:: String^ currUserPathString = gcnew String(filepath.c_str());
+		System:: String^ imagePath = currUserPathString + currentPicture.ToString() + ".jpg";
+		if (System::IO::File::Exists(imagePath)) {
+			pictureBox1->Image = System::Drawing::Image::FromFile(imagePath);
+		}
+	}
+	private:
+		System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+			currentPicture++;
+			previous = true;
+		}
+	private:
+		System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+			currentPicture--;
+			next = true;
+		}
+};
 }
