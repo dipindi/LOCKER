@@ -22,6 +22,7 @@ void uploadWindow();
 std::string currUser;
 std::string currUserPath = fs::current_path().string() + "\\UserFolders\\" + currUser;
 
+
 [STAThreadAttribute]
 int main(array<String^>^ args) {
 	Application::EnableVisualStyles();
@@ -59,7 +60,14 @@ void regisWindow() {
 } // end of regisWindow
 
 void homeWindow() {
+	static int currUserIndex = 0;
+	std::ifstream inJson(currUserPath + currUser + "\\" + currUser + ".json");
+	nlohmann::ordered_json imageJson;
+	inJson >> imageJson;
 	LOCKER::homeForm home;
+	std::string jsonPathStr = currUserPath + currUser + "\\" + currUser + ".json";
+	System::String^ jsonPath = gcnew String(jsonPathStr.c_str());
+	home.jsonFilePath = jsonPath;
 	home.ShowDialog();
 
 	if (home.signOff) {
@@ -69,24 +77,18 @@ void homeWindow() {
 	if (home.openUpload) {
 		uploadWindow();
 	}
-} // end of homeWindow
 
-/*void uploadWindow() {
-	LOCKER::uploadForm upload;
-	upload.ShowDialog();
-
-	if (upload.backToHome) {
-		System::String^ imgpath = upload.path;
-		System::String^ imgname = upload.name;
-		std::stringstream timestamp;
-		timestamp << time(NULL);
-		std::string imgpathstr = msclr::interop::marshal_as<std::string>(imgpath);
-		fs::path imgPath = msclr::interop::marshal_as<std::string>(imgname);
-		fs::path destPath = currUserPath + currUser + "\\" + timestamp.str() + ".jpg";
-		fs::copy_file(imgPath, destPath, fs::copy_options::overwrite_existing);
-		homeWindow();
+	if (home.previous) {
+		
+		if (currUserIndex != 0 ) {
+			--currUserIndex;
+		}
 	}
-} // end of uploadWindow*/
+
+	if (home.next) {
+
+	}
+} // end of homeWindow
 
 void uploadWindow() {
 	LOCKER::uploadForm upload;
@@ -132,3 +134,4 @@ void uploadWindow() {
 		homeWindow();
 	}
 }
+// end of upload window

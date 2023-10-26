@@ -1,6 +1,9 @@
 #pragma once
 #include "Users.h"
 #include "loginForm.h"
+#include <msclr\marshal.h>
+#include <msclr\marshal_cppstd.h>
+#include <json.hpp>
 
 namespace LOCKER {
 
@@ -115,6 +118,7 @@ namespace LOCKER {
 			this->pictureBox1->Size = System::Drawing::Size(259, 323);
 			this->pictureBox1->TabIndex = 5;
 			this->pictureBox1->TabStop = false;
+			this->pictureBox1->Click += gcnew System::EventHandler(this, &homeForm::pictureBox1_Click);
 			// 
 			// label1
 			// 
@@ -198,22 +202,35 @@ namespace LOCKER {
 	}
 	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
-	private: System::Void UpdateImage(std::string filepath) {
-		System:: String^ currUserPathString = gcnew String(filepath.c_str());
-		System:: String^ imagePath = currUserPathString + currentPicture.ToString() + ".jpg";
+	public:	String^ jsonFilePath;
+	private: System::Void UpdateImage() {
+		msclr::interop::marshal_context context;
+		std::string jsonFilePathString = context.marshal_as<std::string>(jsonFilePath);
+		nlohmann::ordered_json imageJson;
+		std::ifstream inJson(jsonFilePathString);
+		inJson >> imageJson;
+		String^ imagePath = gcnew String(imageJson["images"][currentPicture]["imgpath"].get<std::string>().c_str());
+
+		System::String^ currUserPathString = gcnew String(jsonFilePathString.c_str());
 		if (System::IO::File::Exists(imagePath)) {
-			pictureBox1->Image = System::Drawing::Image::FromFile(imagePath);
+			pictureBox1->ImageLocation = imagePath;
 		}
+		pictureBox1->BringToFront();
 	}
+	
 	private:
 		System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-			currentPicture++;
+			currentPicture--;
+			UpdateImage();
 			previous = true;
 		}
 	private:
 		System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-			currentPicture--;
+			currentPicture++;
+			UpdateImage();
 			next = true;
 		}
+private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }
