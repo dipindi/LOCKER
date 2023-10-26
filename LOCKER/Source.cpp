@@ -93,10 +93,10 @@ void uploadWindow() {
 	upload.ShowDialog();
 	if (upload.backToHome) {
 		nlohmann::ordered_json currUserJson;
-		System::String^ imgpath = upload.path;
-		System::String^ imgname = upload.name;
-		System::String^ title = upload.title;
-		System::String^ desc = upload.description;
+		String^ imgpath = upload.path;
+		String^ imgname = upload.name;
+		String^ title = upload.title;
+		String^ desc = upload.description;
 
 		std::stringstream timestamp;
 		timestamp << time(NULL);
@@ -110,10 +110,10 @@ void uploadWindow() {
 		imageInfo["img_desc"] = descstr;
 		imageInfo["imgpath"] = currUserPath + currUser + "\\" + timestamp.str() + ".jpg";
 
-		// Read existing json file if it exists
-		std::ifstream inJson(currUserPath + currUser + "\\" + currUser + ".json");
+		// Read existing JSON file if it exists
+		std::ifstream inJson(msclr::interop::marshal_as<std::string>(currUserPath + currUser + "\\" + currUser + ".json"));
 		if (inJson.good()) {
-			currUserJson = nlohmann::json::parse(inJson);
+			inJson >> currUserJson;
 		}
 		inJson.close();
 
@@ -124,8 +124,8 @@ void uploadWindow() {
 		fs::path destPath = currUserPath + currUser + "\\" + timestamp.str() + ".jpg";
 		fs::copy_file(imgPath, destPath, fs::copy_options::overwrite_existing);
 
-		// Write updated json file
-		std::ofstream outJson(currUserPath + currUser + "\\" + currUser + ".json");
+		// Write updated JSON file
+		std::ofstream outJson(msclr::interop::marshal_as<std::string>(currUserPath + currUser + "\\" + currUser + ".json"));
 		outJson << std::setw(4) << currUserJson;
 		outJson.close();
 

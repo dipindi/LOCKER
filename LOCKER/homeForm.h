@@ -1,6 +1,7 @@
 #pragma once
 #include "Users.h"
-#include "loginForm.h"
+#include "json.hpp"
+#include <msclr/marshal_cppstd.h>
 
 namespace LOCKER {
 
@@ -124,7 +125,6 @@ namespace LOCKER {
 			this->label1->Size = System::Drawing::Size(67, 25);
 			this->label1->TabIndex = 6;
 			this->label1->Text = L"TITLE";
-			this->label1->Click += gcnew System::EventHandler(this, &homeForm::label1_Click);
 			// 
 			// label2
 			// 
@@ -183,7 +183,6 @@ namespace LOCKER {
 		}
 #pragma endregion
 	public: bool signOff = false;
-		  int currentPicture = 1;
 	private: System::Void logoutButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		signOff = true;
 		this->Close();
@@ -196,24 +195,54 @@ namespace LOCKER {
 		openUpload = true;
 		this->Close();
 	}
-	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void UpdateImage(std::string filepath) {
-		System:: String^ currUserPathString = gcnew String(filepath.c_str());
-		System:: String^ imagePath = currUserPathString + currentPicture.ToString() + ".jpg";
-		if (System::IO::File::Exists(imagePath)) {
-			pictureBox1->Image = System::Drawing::Image::FromFile(imagePath);
+
+public:
+	String^ jsonFilePath;
+	int currentPicture = 1;
+
+private:
+	System::Void UpdateImage() {
+		nlohmann::ordered_json imageJson;
+		msclr::interop::marshal_context context;
+		std::string jsonFilePathString = context.marshal_as<std::string>(jsonFilePath);
+		std::ifstream inJson(jsonFilePathString);
+		if (inJson.good()) {
+			inJson >> imageJson;
+		}
+		inJson.close();
+
+		if (imageJson.contains("images") && imageJson["images"].is_array() && currentPicture < imageJson["images"].size()) {
+			String^ imagePath = gcnew String(imageJson["images"][currentPicture]["imgpath"].get<std::string>().c_str());
+
+			if (System::IO::File::Exists(imagePath)) {
+				pictureBox1->ImageLocation = imagePath;
+				pictureBox1->BringToFront();
+			}
 		}
 	}
+
 	private:
 		System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-			currentPicture++;
-			previous = true;
+			if (currentPicture > 1) {
+				currentPicture--;
+				UpdateImage();
+			}
 		}
 	private:
 		System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-			currentPicture--;
-			next = true;
+			nlohmann::ordered_json imageJson;
+			msclr::interop::marshal_context context;
+			std::string jsonFilePathString = context.marshal_as<std::string>(jsonFilePath);
+			std::ifstream inJson(jsonFilePathString);
+			if (inJson.good()) {
+				inJson >> imageJson;
+			}
+			inJson.close();
+
+			if (imageJson.contains("images") && imageJson["images"].is_array() && currentPicture < imageJson["images"].size()) {
+				currentPicture++;
+				UpdateImage();
+			}
 		}
 };
 }

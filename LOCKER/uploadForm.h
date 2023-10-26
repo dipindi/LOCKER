@@ -278,8 +278,6 @@ namespace LOCKER {
 		int currentIndex;
 
 	public: bool backToHome = false;
-	public:      System::String^ path;
-	public:		 System::String^ name;
 	private: System::Void cancelButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		backToHome = true;
 		this->Close();
@@ -291,6 +289,10 @@ namespace LOCKER {
 		backToHome = true;
 		this->Close();
 	}
+
+	public:
+		System::String^ path;
+		System::String^ name;
 	private: System::Void uploadButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (ofd->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 			imageUpload->ImageLocation = ofd->FileName;
@@ -310,8 +312,9 @@ namespace LOCKER {
 		imageUpload->BringToFront();
 	}
 
-	public:	System::String^ title;
-	public: System::String^ description;
+	public:
+		System::String^ title;
+		System::String^ description;
 	private: System::Void titleBox_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 		;
 		title = this->titleBox->Text;
