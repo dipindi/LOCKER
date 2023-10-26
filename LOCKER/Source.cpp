@@ -71,7 +71,7 @@ void homeWindow() {
 	}
 } // end of homeWindow
 
-void uploadWindow() {
+/*void uploadWindow() {
 	LOCKER::uploadForm upload;
 	upload.ShowDialog();
 
@@ -86,4 +86,49 @@ void uploadWindow() {
 		fs::copy_file(imgPath, destPath, fs::copy_options::overwrite_existing);
 		homeWindow();
 	}
-} // end of uploadWindow
+} // end of uploadWindow*/
+
+void uploadWindow() {
+	LOCKER::uploadForm upload;
+	upload.ShowDialog();
+	if (upload.backToHome) {
+		nlohmann::ordered_json currUserJson;
+		System::String^ imgpath = upload.path;
+		System::String^ imgname = upload.name;
+		System::String^ title = upload.title;
+		System::String^ desc = upload.description;
+
+		std::stringstream timestamp;
+		timestamp << time(NULL);
+		std::string imgpathstr = msclr::interop::marshal_as<std::string>(imgpath);
+		std::string titlestr = msclr::interop::marshal_as<std::string>(title);
+		std::string descstr = msclr::interop::marshal_as<std::string>(desc);
+
+		// Individual image info object
+		nlohmann::ordered_json imageInfo;
+		imageInfo["img_title"] = titlestr;
+		imageInfo["img_desc"] = descstr;
+		imageInfo["imgpath"] = currUserPath + currUser + "\\" + timestamp.str() + ".jpg";
+
+		// Read existing json file if it exists
+		std::ifstream inJson(currUserPath + currUser + "\\" + currUser + ".json");
+		if (inJson.good()) {
+			currUserJson = nlohmann::json::parse(inJson);
+		}
+		inJson.close();
+
+		// Append new data
+		currUserJson["images"].push_back(imageInfo);
+
+		fs::path imgPath = msclr::interop::marshal_as<std::string>(imgname);
+		fs::path destPath = currUserPath + currUser + "\\" + timestamp.str() + ".jpg";
+		fs::copy_file(imgPath, destPath, fs::copy_options::overwrite_existing);
+
+		// Write updated json file
+		std::ofstream outJson(currUserPath + currUser + "\\" + currUser + ".json");
+		outJson << std::setw(4) << currUserJson;
+		outJson.close();
+
+		homeWindow();
+	}
+}

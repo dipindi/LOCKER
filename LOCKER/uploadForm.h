@@ -1,5 +1,5 @@
 #pragma once
-
+#include <msclr/marshal_cppstd.h>
 namespace LOCKER {
 
 	using namespace System;
@@ -60,7 +60,7 @@ namespace LOCKER {
 
 
 	private:
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
@@ -131,6 +131,7 @@ namespace LOCKER {
 			this->descBox->Size = System::Drawing::Size(278, 165);
 			this->descBox->TabIndex = 3;
 			this->descBox->Text = L"";
+			this->descBox->TextChanged += gcnew System::EventHandler(this, &uploadForm::descBox_TextChanged);
 			// 
 			// panel2
 			// 
@@ -149,8 +150,9 @@ namespace LOCKER {
 			this->titleBox->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->titleBox->Location = System::Drawing::Point(312, 63);
 			this->titleBox->Name = L"titleBox";
-			this->titleBox->Size = System::Drawing::Size(280, 28);
+			this->titleBox->Size = System::Drawing::Size(280, 34);
 			this->titleBox->TabIndex = 17;
+			this->titleBox->TextChanged += gcnew System::EventHandler(this, &uploadForm::titleBox_TextChanged);
 			// 
 			// imageUpload
 			// 
@@ -195,7 +197,7 @@ namespace LOCKER {
 			this->monthMenu->Location = System::Drawing::Point(409, 32);
 			this->monthMenu->Name = L"monthMenu";
 			this->monthMenu->RightToLeft = System::Windows::Forms::RightToLeft::No;
-			this->monthMenu->Size = System::Drawing::Size(88, 25);
+			this->monthMenu->Size = System::Drawing::Size(88, 29);
 			this->monthMenu->TabIndex = 21;
 			this->monthMenu->Text = L" month";
 			// 
@@ -214,7 +216,7 @@ namespace LOCKER {
 			this->yearMenu->Location = System::Drawing::Point(503, 32);
 			this->yearMenu->Name = L"yearMenu";
 			this->yearMenu->RightToLeft = System::Windows::Forms::RightToLeft::No;
-			this->yearMenu->Size = System::Drawing::Size(88, 25);
+			this->yearMenu->Size = System::Drawing::Size(88, 29);
 			this->yearMenu->TabIndex = 22;
 			this->yearMenu->Text = L" year";
 			// 
@@ -226,7 +228,7 @@ namespace LOCKER {
 			this->titleLabel->ForeColor = System::Drawing::SystemColors::ControlText;
 			this->titleLabel->Location = System::Drawing::Point(308, 36);
 			this->titleLabel->Name = L"titleLabel";
-			this->titleLabel->Size = System::Drawing::Size(53, 21);
+			this->titleLabel->Size = System::Drawing::Size(65, 26);
 			this->titleLabel->TabIndex = 23;
 			this->titleLabel->Text = L"TITLE";
 			// 
@@ -237,7 +239,7 @@ namespace LOCKER {
 				static_cast<System::Byte>(0)));
 			this->descLabel->Location = System::Drawing::Point(308, 94);
 			this->descLabel->Name = L"descLabel";
-			this->descLabel->Size = System::Drawing::Size(120, 21);
+			this->descLabel->Size = System::Drawing::Size(149, 26);
 			this->descLabel->TabIndex = 24;
 			this->descLabel->Text = L"DESCRIPTION";
 			// 
@@ -272,7 +274,7 @@ namespace LOCKER {
 #pragma endregion
 
 		array<String^>^ files;
-		
+
 		int currentIndex;
 
 	public: bool backToHome = false;
@@ -285,7 +287,7 @@ namespace LOCKER {
 
 	private: System::Void confirmButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		MessageBox::Show("Entry successfully uploaded");
-		
+
 		backToHome = true;
 		this->Close();
 	}
@@ -307,5 +309,15 @@ namespace LOCKER {
 		}
 		imageUpload->BringToFront();
 	}
-};
+
+	public:	System::String^ title;
+	public: System::String^ description;
+	private: System::Void titleBox_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+		;
+		title = this->titleBox->Text;
+	}
+	private: System::Void descBox_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+		description = this->descBox->Text;
+	}
+	};
 }
