@@ -47,6 +47,8 @@ namespace LOCKER {
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Button^ button3;
 
+	private: System::Windows::Forms::Label^ label4;
+
 
 	private:
 		System::ComponentModel::Container ^components;
@@ -65,6 +67,7 @@ namespace LOCKER {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->label4 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->headerImage))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->logoutButton))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
@@ -117,30 +120,34 @@ namespace LOCKER {
 			// 
 			// button1
 			// 
+			this->button1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(156)),
+				static_cast<System::Int32>(static_cast<System::Byte>(48)));
 			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->button1->Location = System::Drawing::Point(24, 311);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(64, 64);
 			this->button1->TabIndex = 8;
 			this->button1->Text = L"<";
-			this->button1->UseVisualStyleBackColor = true;
+			this->button1->UseVisualStyleBackColor = false;
 			this->button1->Click += gcnew System::EventHandler(this, &homeForm::button1_Click);
 			// 
 			// button2
 			// 
+			this->button2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(156)),
+				static_cast<System::Int32>(static_cast<System::Byte>(48)));
 			this->button2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->button2->Location = System::Drawing::Point(538, 311);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(64, 64);
 			this->button2->TabIndex = 9;
 			this->button2->Text = L">";
-			this->button2->UseVisualStyleBackColor = true;
+			this->button2->UseVisualStyleBackColor = false;
 			this->button2->Click += gcnew System::EventHandler(this, &homeForm::button2_Click);
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(110, 601);
+			this->label1->Location = System::Drawing::Point(110, 619);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(146, 32);
 			this->label1->TabIndex = 10;
@@ -170,12 +177,24 @@ namespace LOCKER {
 			this->button3->UseVisualStyleBackColor = true;
 			this->button3->Click += gcnew System::EventHandler(this, &homeForm::button3_Click);
 			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Font = (gcnew System::Drawing::Font(L"PP Agrandir Text", 12, System::Drawing::FontStyle::Bold));
+			this->label4->Location = System::Drawing::Point(111, 595);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(68, 26);
+			this->label4->TabIndex = 14;
+			this->label4->Text = L"0000";
+			this->label4->Click += gcnew System::EventHandler(this, &homeForm::label4_Click);
+			// 
 			// homeForm
 			// 
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(244)),
 				static_cast<System::Int32>(static_cast<System::Byte>(235)));
 			this->ClientSize = System::Drawing::Size(624, 703);
+			this->Controls->Add(this->label4);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->label2);
@@ -228,6 +247,8 @@ namespace LOCKER {
 		std::string imagePath = imageJson["images"][currentPicture]["imgpath"].get<std::string>();
 		std::string imgDesc = imageJson["images"][currentPicture]["img_desc"].get<std::string>();
 		std::string imgTitle = imageJson["images"][currentPicture]["img_title"].get<std::string>();
+		std::string imgMonth = imageJson["images"][currentPicture]["img_month"].get<std::string>();
+		std::string imgYear = imageJson["images"][currentPicture]["img_year"].get<std::string>();
 
 		// Update PictureBox with the image
 		String^ imagePathStr = gcnew String(imagePath.c_str());
@@ -235,9 +256,12 @@ namespace LOCKER {
 			pictureBox1->ImageLocation = imagePathStr;
 		}
 
+		String^ monthNyear = gcnew String(imgMonth.c_str()) + " " + gcnew String(imgYear.c_str());
+
 		// Display image description and title
 		label1->Text = gcnew String(imgDesc.c_str());
 		label2->Text = gcnew String(imgTitle.c_str());
+		label4->Text = monthNyear;
 
 		pictureBox1->BringToFront();
 	}
@@ -259,6 +283,8 @@ private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArg
 	}
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 	UpdateImage();
+}
+private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

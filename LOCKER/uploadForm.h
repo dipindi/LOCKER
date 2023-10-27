@@ -200,6 +200,7 @@ namespace LOCKER {
 			this->monthMenu->Size = System::Drawing::Size(88, 29);
 			this->monthMenu->TabIndex = 21;
 			this->monthMenu->Text = L" month";
+			this->monthMenu->SelectedIndexChanged += gcnew System::EventHandler(this, &uploadForm::monthMenu_SelectedIndexChanged);
 			// 
 			// yearMenu
 			// 
@@ -219,6 +220,7 @@ namespace LOCKER {
 			this->yearMenu->Size = System::Drawing::Size(88, 29);
 			this->yearMenu->TabIndex = 22;
 			this->yearMenu->Text = L" year";
+			this->yearMenu->SelectedIndexChanged += gcnew System::EventHandler(this, &uploadForm::yearMenu_SelectedIndexChanged);
 			// 
 			// titleLabel
 			// 
@@ -312,6 +314,8 @@ namespace LOCKER {
 
 	public:	System::String^ title;
 	public: System::String^ description;
+	public: System::String^ month;
+	public: System::String^ year;
 	private: System::Void titleBox_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 		;
 		title = this->titleBox->Text;
@@ -319,5 +323,11 @@ namespace LOCKER {
 	private: System::Void descBox_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 		description = this->descBox->Text;
 	}
-	};
+	private: System::Void yearMenu_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+		year = this->yearMenu->Text;
+	}
+	private: System::Void monthMenu_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+		month = this->monthMenu->Text;
+	}
+};
 }

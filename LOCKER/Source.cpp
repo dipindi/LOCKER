@@ -99,17 +99,23 @@ void uploadWindow() {
 		System::String^ imgname = upload.name;
 		System::String^ title = upload.title;
 		System::String^ desc = upload.description;
+		System::String^ month = upload.month;
+		System::String^ year = upload.year;
 
 		std::stringstream timestamp;
 		timestamp << time(NULL);
 		std::string imgpathstr = msclr::interop::marshal_as<std::string>(imgpath);
 		std::string titlestr = msclr::interop::marshal_as<std::string>(title);
 		std::string descstr = msclr::interop::marshal_as<std::string>(desc);
+		std::string monthstr = msclr::interop::marshal_as<std::string>(month);
+		std::string yearstr = msclr::interop::marshal_as<std::string>(year);
 
 		// Individual image info object
 		nlohmann::ordered_json imageInfo;
 		imageInfo["img_title"] = titlestr;
 		imageInfo["img_desc"] = descstr;
+		imageInfo["img_month"] = monthstr;
+		imageInfo["img_year"] = yearstr;
 		imageInfo["imgpath"] = currUserPath + currUser + "\\" + timestamp.str() + ".jpg";
 
 		// Read existing json file if it exists
