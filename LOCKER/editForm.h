@@ -12,6 +12,7 @@ namespace LOCKER {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace msclr::interop;
 
 	/// <summary>
 	/// Summary for editForm
@@ -256,19 +257,21 @@ namespace LOCKER {
 	public:
 		int currentPicEdit = 0;
 		String^ jsonFilePath;
+		System::Collections::Generic::Dictionary<String^, String^> imageJson;
+
 	private: System::Void UpdateImage() {
 		msclr::interop::marshal_context context;
 		std::string jsonFilePathString = "C:\\Users\\iamma\\source\\repos\\LOCKER\\LOCKER\\UserFolders\\jonor\\jonor.json";
-		nlohmann::ordered_json imageJson;
 		std::ifstream inJson(jsonFilePathString);
-		inJson >> imageJson;
+		nlohmann::json nlohmannJson;
+		inJson >> nlohmannJson;
 
 		// Get image path, description, and title
-		std::string imagePath = imageJson["images"][currentPicEdit]["imgpath"].get<std::string>();
-		std::string imgDesc = imageJson["images"][currentPicEdit]["img_desc"].get<std::string>();
-		std::string imgTitle = imageJson["images"][currentPicEdit]["img_title"].get<std::string>();
-		std::string imgMonth = imageJson["images"][currentPicEdit]["img_month"].get<std::string>();
-		std::string imgYear = imageJson["images"][currentPicEdit]["img_year"].get<std::string>();
+		std::string imagePath = nlohmannJson["images"][currentPicEdit]["imgpath"].get<std::string>();
+		std::string imgDesc = nlohmannJson["images"][currentPicEdit]["img_desc"].get<std::string>();
+		std::string imgTitle = nlohmannJson["images"][currentPicEdit]["img_title"].get<std::string>();
+		std::string imgMonth = nlohmannJson["images"][currentPicEdit]["img_month"].get<std::string>();
+		std::string imgYear = nlohmannJson["images"][currentPicEdit]["img_year"].get<std::string>();
 
 		// Update PictureBox with the image
 		String^ imagePathStr = gcnew String(imagePath.c_str());
@@ -286,14 +289,23 @@ namespace LOCKER {
 
 	public: bool saveEntry = false;
 	private: System::Void saveButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		nlohmann::ordered_json imageJson;
-		std::string jsonFilePathString;
-		imageJson["images"][currentPicEdit]["img_title"] = msclr::interop::marshal_as<std::string>(titleBox->Text);
+		msclr::interop::marshal_context context;
+		std::string jsonFilePathString = "C:\\Users\\iamma\\source\\repos\\LOCKER\\LOCKER\\UserFolders\\jonor\\jonor.json";
+		nlohmann::json nlohmannJson;
 
-		// Write the updated JSON file
+		// Read the existing JSON data
+		std::ifstream inJson(jsonFilePathString);
+		inJson >> nlohmannJson;
+
+		// Update the img_title in the JSON data
+		nlohmannJson["images"][currentPicEdit]["img_title"] = msclr::interop::marshal_as<std::string>(titleBox->Text);
+		nlohmannJson["images"][currentPicEdit]["img_desc"] = msclr::interop::marshal_as<std::string>(descBox->Text);
+
+		// Write the updated JSON back to the file
 		std::ofstream outJson(jsonFilePathString);
-		outJson << std::setw(4) << imageJson;
+		outJson << std::setw(4) << nlohmannJson;
 		outJson.close();
+
 		saveEntry = true;
 		this->Close();
 	}
