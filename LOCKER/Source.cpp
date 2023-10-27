@@ -112,13 +112,16 @@ void uploadWindow() {
 
 		// currUserPath + currUser + "\\" + currUser + ".json"
 
+		if (title == "" || desc == "") {
+			MessageBox::Show("Title and Description cannot be empty");
+		}
+
 		fs::path imgPath = msclr::interop::marshal_as<std::string>(imgname);
 		std::string imgTitle = msclr::interop::marshal_as<std::string>(title);
 		std::string imgDesc = msclr::interop::marshal_as<std::string>(desc);
 		fs::path destPath = currUserPath + currUser + "\\" + indexstr.str() + ".jpg";
 		fs::copy_file(imgPath, destPath, fs::copy_options::overwrite_existing);
 
-		// Write updated json file
 		std::ofstream outTxt(currUserPath + currUser + "\\" + "images" + ".txt", std::ios::app);
 
 		outTxt << indexstr.str() << ".jpg" << " " << imgTitle << " " << imgDesc << "\n";
