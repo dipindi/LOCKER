@@ -275,7 +275,7 @@ namespace LOCKER {
 
 		array<String^>^ files;
 
-		int currentIndex;
+	public: static int currentIndex;
 
 	public: bool backToHome = false;
 	public:      System::String^ path;
@@ -297,15 +297,7 @@ namespace LOCKER {
 			path = System::IO::Path::GetDirectoryName(ofd->FileName);
 			name = ofd->FileName;
 			files = System::IO::Directory::GetFiles(path);
-
-			for (int i = 0; i < files->Length; i++)
-			{
-				if (files[i] == ofd->FileName)
-				{
-					currentIndex = i;
-					break;
-				}
-			}
+			currentIndex++;
 		}
 		imageUpload->BringToFront();
 	}

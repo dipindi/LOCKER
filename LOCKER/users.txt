@@ -1,4 +1,6 @@
-mico 1234
-xandre 1234
-mark 1234
-amen 1234
+mico 1234 0
+xandre 1234 0
+mark 1234 0
+amen 1234 0
+haha 1234 0
+111 222 0
