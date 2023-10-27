@@ -272,12 +272,11 @@ private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArg
 }
 
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (currentPicture <= json["images"].size())
-			currentPicture++;
+		currentPicture++;
 		UpdateImage();
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (currentPicture >= json["images"].size())
+		if (currentPicture > 0)
 			currentPicture--;
 		UpdateImage();
 	}
