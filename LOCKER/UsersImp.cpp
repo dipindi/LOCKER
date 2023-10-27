@@ -1,5 +1,6 @@
 #include "Users.h"
 #include <filesystem>
+#include "json.hpp"
 
 namespace fs = std::filesystem;
 
@@ -35,6 +36,12 @@ void addCredentials(System::String^ username, System::String^ password) {
 	if (!fs::exists(folderName)) {
 		fs::create_directories(folderName);
 	}
+
+	nlohmann::ordered_json emptyJson;
+	emptyJson["images"] = {};
+	std::ofstream outfile(fs::current_path().string() + "\\UserFolders\\" + newUser.username + "\\" + newUser.username + ".json");
+	outfile << std::setw(4) << emptyJson;
+	outfile.close();
 
 	// Create numberOfEntries.txt file
 	std::string entriesFile = folderName + "\\numberOfEntries.txt";
