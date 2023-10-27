@@ -128,6 +128,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="editForm.cpp" />
     <ClCompile Include="loginForm.cpp" />
     <ClCompile Include="homeForm.cpp" />
     <ClCompile Include="registerForm.cpp" />
@@ -136,6 +137,9 @@
     <ClCompile Include="UsersImp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="editForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="json.hpp" />
     <ClInclude Include="uploadForm.h">
       <FileType>CppForm</FileType>

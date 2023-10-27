@@ -3,7 +3,7 @@
 #include "loginForm.h"
 #include <msclr\marshal.h>
 #include <msclr\marshal_cppstd.h>
-#include <json.hpp>
+#include "json.hpp"
 
 namespace LOCKER {
 
@@ -233,7 +233,7 @@ namespace LOCKER {
 		this->Close();
 	}
 
-	public:	String^ jsonFilePath;
+	public:	String^ jsonFilePath; 
 	private: System::Void UpdateImage() {
 		msclr::interop::marshal_context context;
 		std::string jsonFilePathString = context.marshal_as<std::string>(jsonFilePath);
@@ -272,11 +272,13 @@ private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArg
 }
 
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-		currentPicture++;
+		if (currentPicture <= json["images"].size())
+			currentPicture++;
 		UpdateImage();
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		currentPicture--;
+		if (currentPicture >= json["images"].size())
+			currentPicture--;
 		UpdateImage();
 	}
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
