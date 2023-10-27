@@ -147,7 +147,7 @@ void editWindow() {
 	inJson >> imageJson;
 	std::string jsonPathStr = currUserPath + currUser + "\\" + currUser + ".json";
 	System::String^ jsonPath = gcnew String(jsonPathStr.c_str());
-	edit.jsonFilePath = "C:\\Users\\K3lite\\source\\repos\\LOCKER\\LOCKER\\UserFolders\\mico\\mico.json";
+	edit.jsonFilePath = "C:\\Users\\iamma\\source\\repos\\LOCKER\\LOCKER\\UserFolders\\jonor\\jonor.json";
 
 	if (edit.saveEntry) {
 		homeWindow();

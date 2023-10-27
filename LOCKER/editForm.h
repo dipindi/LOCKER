@@ -258,7 +258,7 @@ namespace LOCKER {
 		String^ jsonFilePath;
 	private: System::Void UpdateImage() {
 		msclr::interop::marshal_context context;
-		std::string jsonFilePathString = context.marshal_as<std::string>(jsonFilePath);
+		std::string jsonFilePathString = "C:\\Users\\iamma\\source\\repos\\LOCKER\\LOCKER\\UserFolders\\jonor\\jonor.json";
 		nlohmann::ordered_json imageJson;
 		std::ifstream inJson(jsonFilePathString);
 		inJson >> imageJson;
@@ -286,6 +286,14 @@ namespace LOCKER {
 
 	public: bool saveEntry = false;
 	private: System::Void saveButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		nlohmann::ordered_json imageJson;
+		std::string jsonFilePathString;
+		imageJson["images"][currentPicEdit]["img_title"] = msclr::interop::marshal_as<std::string>(titleBox->Text);
+
+		// Write the updated JSON file
+		std::ofstream outJson(jsonFilePathString);
+		outJson << std::setw(4) << imageJson;
+		outJson.close();
 		saveEntry = true;
 		this->Close();
 	}
