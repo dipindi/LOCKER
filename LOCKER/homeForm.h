@@ -116,6 +116,7 @@ namespace LOCKER {
 			this->pictureBox1->Location = System::Drawing::Point(188, 228);
 			this->pictureBox1->Name = L"pictureBox1";
 			this->pictureBox1->Size = System::Drawing::Size(259, 323);
+			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox1->TabIndex = 5;
 			this->pictureBox1->TabStop = false;
 			this->pictureBox1->Click += gcnew System::EventHandler(this, &homeForm::pictureBox1_Click);
@@ -147,6 +148,7 @@ namespace LOCKER {
 			this->button1->TabIndex = 8;
 			this->button1->Text = L"previous";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &homeForm::button1_Click_1);
 			// 
 			// button2
 			// 
@@ -156,6 +158,7 @@ namespace LOCKER {
 			this->button2->TabIndex = 9;
 			this->button2->Text = L"next";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &homeForm::button2_Click);
 			// 
 			// homeForm
 			// 
@@ -217,20 +220,18 @@ namespace LOCKER {
 		}
 		pictureBox1->BringToFront();
 	}
-	
-	private:
-		System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-			currentPicture--;
-			UpdateImage();
-			previous = true;
-		}
-	private:
-		System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-			currentPicture++;
-			UpdateImage();
-			next = true;
-		}
+
 private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {
 }
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+		currentPicture++;
+		UpdateImage();
+		next = true;
+	}
+	private: System::Void button1_Click_1(System::Object^ sender, System::EventArgs^ e) {
+		currentPicture--;
+		UpdateImage();
+		previous = true;
+	}
 };
 }
