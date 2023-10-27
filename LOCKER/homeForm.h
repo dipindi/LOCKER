@@ -241,8 +241,6 @@ namespace LOCKER {
 		std::ifstream inJson(jsonFilePathString);
 		inJson >> imageJson;
 
-		int currentPicture = 0; // Replace with the index of the desired image.
-
 		// Get image path, description, and title
 		std::string imagePath = imageJson["images"][currentPicture]["imgpath"].get<std::string>();
 		std::string imgDesc = imageJson["images"][currentPicture]["img_desc"].get<std::string>();
