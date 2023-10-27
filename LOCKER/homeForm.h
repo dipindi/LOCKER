@@ -42,12 +42,16 @@ namespace LOCKER {
 
 
 	private: System::Windows::Forms::Button^ button1;
-	private: System::Windows::Forms::Button^ button2;
+
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Button^ button3;
 
 	private: System::Windows::Forms::Label^ label4;
+	private: System::Windows::Forms::Button^ button4;
+	private: System::Windows::Forms::Button^ button5;
+	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::Button^ sortButton;
 
 
 	private:
@@ -63,11 +67,14 @@ namespace LOCKER {
 			this->uploadButton = (gcnew System::Windows::Forms::Button());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->button5 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->sortButton = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->headerImage))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->logoutButton))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
@@ -131,19 +138,6 @@ namespace LOCKER {
 			this->button1->UseVisualStyleBackColor = false;
 			this->button1->Click += gcnew System::EventHandler(this, &homeForm::button1_Click);
 			// 
-			// button2
-			// 
-			this->button2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(156)),
-				static_cast<System::Int32>(static_cast<System::Byte>(48)));
-			this->button2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button2->Location = System::Drawing::Point(538, 311);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(64, 64);
-			this->button2->TabIndex = 9;
-			this->button2->Text = L">";
-			this->button2->UseVisualStyleBackColor = false;
-			this->button2->Click += gcnew System::EventHandler(this, &homeForm::button2_Click);
-			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
@@ -188,12 +182,70 @@ namespace LOCKER {
 			this->label4->Text = L"0000";
 			this->label4->Click += gcnew System::EventHandler(this, &homeForm::label4_Click);
 			// 
+			// button4
+			// 
+			this->button4->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(235)), static_cast<System::Int32>(static_cast<System::Byte>(92)),
+				static_cast<System::Int32>(static_cast<System::Byte>(30)));
+			this->button4->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button4->Font = (gcnew System::Drawing::Font(L"Fira Code", 8));
+			this->button4->Location = System::Drawing::Point(531, 512);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(81, 36);
+			this->button4->TabIndex = 15;
+			this->button4->Text = L"delete";
+			this->button4->UseVisualStyleBackColor = false;
+			this->button4->Click += gcnew System::EventHandler(this, &homeForm::button4_Click);
+			// 
+			// button5
+			// 
+			this->button5->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(244)),
+				static_cast<System::Int32>(static_cast<System::Byte>(235)));
+			this->button5->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button5->Font = (gcnew System::Drawing::Font(L"Fira Code", 8));
+			this->button5->Location = System::Drawing::Point(531, 461);
+			this->button5->Name = L"button5";
+			this->button5->Size = System::Drawing::Size(81, 36);
+			this->button5->TabIndex = 16;
+			this->button5->Text = L"edit";
+			this->button5->UseVisualStyleBackColor = false;
+			this->button5->Click += gcnew System::EventHandler(this, &homeForm::button5_Click);
+			// 
+			// button2
+			// 
+			this->button2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(156)),
+				static_cast<System::Int32>(static_cast<System::Byte>(48)));
+			this->button2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button2->Location = System::Drawing::Point(538, 311);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(64, 64);
+			this->button2->TabIndex = 9;
+			this->button2->Text = L">";
+			this->button2->UseVisualStyleBackColor = false;
+			this->button2->Click += gcnew System::EventHandler(this, &homeForm::button2_Click);
+			// 
+			// sortButton
+			// 
+			this->sortButton->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(244)),
+				static_cast<System::Int32>(static_cast<System::Byte>(235)));
+			this->sortButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->sortButton->Font = (gcnew System::Drawing::Font(L"Fira Code", 8));
+			this->sortButton->Location = System::Drawing::Point(531, 406);
+			this->sortButton->Name = L"sortButton";
+			this->sortButton->Size = System::Drawing::Size(81, 36);
+			this->sortButton->TabIndex = 17;
+			this->sortButton->Text = L"sort";
+			this->sortButton->UseVisualStyleBackColor = false;
+			this->sortButton->Click += gcnew System::EventHandler(this, &homeForm::sortButton_Click);
+			// 
 			// homeForm
 			// 
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(244)),
 				static_cast<System::Int32>(static_cast<System::Byte>(235)));
 			this->ClientSize = System::Drawing::Size(624, 703);
+			this->Controls->Add(this->sortButton);
+			this->Controls->Add(this->button5);
+			this->Controls->Add(this->button4);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->button3);
@@ -272,18 +324,65 @@ private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArg
 }
 
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-		currentPicture++;
-		UpdateImage();
+		if (filter == false) {
+			currentPicture++;
+			UpdateImage();
+		}
+		if (filter == true) {
+			currentPicture--;
+			UpdateImage();
+		}
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (currentPicture > 0)
+		if (filter == true) {
+			currentPicture++;
+			UpdateImage();
+		}
+		if (filter == false) {
 			currentPicture--;
-		UpdateImage();
+			UpdateImage();
+		}
 	}
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 	UpdateImage();
 }
 private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+
+	private: System::Void deleteEntry() {
+		msclr::interop::marshal_context context;
+		std::string jsonFilePathString = context.marshal_as<std::string>(jsonFilePath);
+		nlohmann::ordered_json imageJson;
+		std::ifstream inJson(jsonFilePathString);
+		inJson >> imageJson;
+
+		if (imageJson.find("images") != imageJson.end() && imageJson["images"].is_array()) {
+			if (currentPicture >= 0 && currentPicture < imageJson["images"].size()) {
+				imageJson["images"].erase(imageJson["images"].begin() + currentPicture);
+
+				std::ofstream outJson(jsonFilePathString);
+				outJson << imageJson;
+			}
+		}
+		currentPicture = 0;
+	}
+
+private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
+		deleteEntry();
+		MessageBox::Show("Entry deleted");
+		UpdateImage();
+	}
+public: bool openEditor = false;
+private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
+	openEditor = true;
+	this->Close();
+}
+
+public:
+	bool filter = false;
+private: System::Void sortButton_Click(System::Object^ sender, System::EventArgs^ e) {
+	filter ? true : false;
+	filter = !filter;
 }
 };
 }

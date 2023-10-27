@@ -3,6 +3,8 @@
 #include "registerForm.h"
 #include "homeForm.h"
 #include "uploadForm.h"
+#include "editForm.h"
+
 #include <msclr/marshal_cppstd.h>
 // User Handling header file
 #include "Users.h"	
@@ -18,6 +20,7 @@ void startLocker();
 void regisWindow();
 void homeWindow();
 void uploadWindow();
+void editWindow();
 
 std::string currUser;
 std::string currUserPath = fs::current_path().string() + "\\UserFolders\\" + currUser;
@@ -77,6 +80,10 @@ void homeWindow() {
 	if (home.openUpload) {
 		uploadWindow();
 	}
+
+	if (home.openEditor) {
+		editWindow();
+	}
 } // end of homeWindow
 
 void uploadWindow() {
@@ -128,5 +135,21 @@ void uploadWindow() {
 
 		homeWindow();
 	}
-}
-// end of upload window
+} // end of upload window
+
+void editWindow() {
+	LOCKER::editForm edit;
+	edit.ShowDialog();
+
+	static int currUserIndex = 0;
+	std::ifstream inJson(currUserPath + currUser + "\\" + currUser + ".json");
+	nlohmann::ordered_json imageJson;
+	inJson >> imageJson;
+	std::string jsonPathStr = currUserPath + currUser + "\\" + currUser + ".json";
+	System::String^ jsonPath = gcnew String(jsonPathStr.c_str());
+	edit.jsonFilePath = "C:\\Users\\K3lite\\source\\repos\\LOCKER\\LOCKER\\UserFolders\\mico\\mico.json";
+
+	if (edit.saveEntry) {
+		homeWindow();
+	}
+} // end of edit window

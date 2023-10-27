@@ -156,6 +156,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="editForm.resx">
+      <DependentUpon>editForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="homeForm.resx">
       <DependentUpon>homeForm.h</DependentUpon>
     </EmbeddedResource>
