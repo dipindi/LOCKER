@@ -1,6 +1,5 @@
 #include "Users.h"
 #include <filesystem>
-#include <json.hpp>
 
 namespace fs = std::filesystem;
 
@@ -51,4 +50,11 @@ void addCredentials(System::String^ username, System::String^ password) {
 		file << newUser.username << " " << newUser.password << " " << newUser.numEntries << std::endl;
 		file.close();
 	}
+}
+int getNumEntries(const loginCredentials& user) {
+	return user.numEntries;
+}
+
+void setNumEntries(loginCredentials& user, int newValue) {
+	user.numEntries = newValue;
 }
