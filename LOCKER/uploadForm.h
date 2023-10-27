@@ -249,7 +249,6 @@ namespace LOCKER {
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(244)),
 				static_cast<System::Int32>(static_cast<System::Byte>(235)));
 			this->ClientSize = System::Drawing::Size(624, 384);
-			this->Controls->Add(this->descLabel);
 			this->Controls->Add(this->titleLabel);
 			this->Controls->Add(this->yearMenu);
 			this->Controls->Add(this->monthMenu);
@@ -258,6 +257,7 @@ namespace LOCKER {
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->uploadButton);
 			this->Controls->Add(this->imageUpload);
+			this->Controls->Add(this->descLabel);
 			this->Font = (gcnew System::Drawing::Font(L"Fira Code", 12));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Margin = System::Windows::Forms::Padding(5, 6, 5, 6);
