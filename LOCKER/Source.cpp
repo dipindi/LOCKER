@@ -4,11 +4,12 @@
 #include "homeForm.h"
 #include "uploadForm.h"
 #include <msclr/marshal_cppstd.h>
+
 // User Handling header file
 #include "Users.h"	
 #include <filesystem>
 #include <ctime>
-#include "json.hpp"
+
 namespace fs = std::filesystem;
 using namespace System;
 using namespace System::Windows::Forms;
@@ -93,7 +94,8 @@ void homeWindow() {
 void uploadWindow() {
 	LOCKER::uploadForm upload;
 	upload.ShowDialog();
-	if (upload.backToHome) 
+
+	if (upload.backToHome) {
 		System::String^ imgpath = upload.path;
 		System::String^ imgname = upload.name;
 		System::String^ title = upload.title;
@@ -125,5 +127,4 @@ void uploadWindow() {
 
 		homeWindow();
 	}
-}
-// end of upload window
+} // end of upload window
