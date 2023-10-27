@@ -77,17 +77,6 @@ void homeWindow() {
 	if (home.openUpload) {
 		uploadWindow();
 	}
-
-	if (home.previous) {
-		
-		if (currUserIndex != 0 ) {
-			--currUserIndex;
-		}
-	}
-
-	if (home.next) {
-
-	}
 } // end of homeWindow
 
 void uploadWindow() {

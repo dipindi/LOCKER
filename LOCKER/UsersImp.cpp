@@ -37,19 +37,20 @@ void addCredentials(System::String^ username, System::String^ password) {
 		fs::create_directories(folderName);
 	}
 
+	// creates a json file
 	nlohmann::ordered_json emptyJson;
 	emptyJson["images"] = {};
 	std::ofstream outfile(fs::current_path().string() + "\\UserFolders\\" + newUser.username + "\\" + newUser.username + ".json");
 	outfile << std::setw(4) << emptyJson;
 	outfile.close();
 
-	// Create numberOfEntries.txt file
-	std::string entriesFile = folderName + "\\numberOfEntries.txt";
-	std::ofstream entriesFileHandler(entriesFile, std::ios::trunc);
-	if (entriesFileHandler.is_open()) {
-		entriesFileHandler << "0";
-		entriesFileHandler.close();
-	}
+	//// Create numberOfEntries.txt file
+	//std::string entriesFile = folderName + "\\numberOfEntries.txt";
+	//std::ofstream entriesFileHandler(entriesFile, std::ios::trunc);
+	//if (entriesFileHandler.is_open()) {
+	//	entriesFileHandler << "0";
+	//	entriesFileHandler.close();
+	//}
 
 	// adds username and password in users.txt
 	std::ofstream file("users.txt", std::ios::app);
