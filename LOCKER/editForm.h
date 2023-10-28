@@ -12,7 +12,6 @@ namespace LOCKER {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-	using namespace msclr::interop;
 
 	/// <summary>
 	/// Summary for editForm
@@ -92,6 +91,8 @@ namespace LOCKER {
 			this->panel1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(27)),
 				static_cast<System::Int32>(static_cast<System::Byte>(27)));
 			this->panel1->Controls->Add(this->saveButton);
+			this->panel1->Controls->Add(this->button2);
+			this->panel1->Controls->Add(this->button1);
 			this->panel1->Location = System::Drawing::Point(0, 320);
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(624, 64);
@@ -179,7 +180,8 @@ namespace LOCKER {
 			// 
 			this->label4->AutoSize = true;
 			this->label4->Font = (gcnew System::Drawing::Font(L"PP Agrandir Text", 12, System::Drawing::FontStyle::Bold));
-			this->label4->Location = System::Drawing::Point(544, 9);
+			this->label4->ForeColor = System::Drawing::SystemColors::ActiveBorder;
+			this->label4->Location = System::Drawing::Point(379, 36);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(68, 26);
 			this->label4->TabIndex = 31;
@@ -191,9 +193,9 @@ namespace LOCKER {
 			this->button1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(156)),
 				static_cast<System::Int32>(static_cast<System::Byte>(48)));
 			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button1->Location = System::Drawing::Point(12, 308);
+			this->button1->Location = System::Drawing::Point(12, 11);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(64, 64);
+			this->button1->Size = System::Drawing::Size(81, 41);
 			this->button1->TabIndex = 32;
 			this->button1->Text = L"<";
 			this->button1->UseVisualStyleBackColor = false;
@@ -204,9 +206,9 @@ namespace LOCKER {
 			this->button2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(156)),
 				static_cast<System::Int32>(static_cast<System::Byte>(48)));
 			this->button2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button2->Location = System::Drawing::Point(82, 308);
+			this->button2->Location = System::Drawing::Point(99, 11);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(64, 64);
+			this->button2->Size = System::Drawing::Size(81, 41);
 			this->button2->TabIndex = 33;
 			this->button2->Text = L">";
 			this->button2->UseVisualStyleBackColor = false;
@@ -216,7 +218,7 @@ namespace LOCKER {
 			// 
 			this->button3->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->button3->Font = (gcnew System::Drawing::Font(L"Fira Code", 8));
-			this->button3->Location = System::Drawing::Point(151, 330);
+			this->button3->Location = System::Drawing::Point(185, 331);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(81, 41);
 			this->button3->TabIndex = 34;
@@ -231,8 +233,6 @@ namespace LOCKER {
 				static_cast<System::Int32>(static_cast<System::Byte>(235)));
 			this->ClientSize = System::Drawing::Size(624, 384);
 			this->Controls->Add(this->button3);
-			this->Controls->Add(this->button2);
-			this->Controls->Add(this->button1);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->titleLabel);
 			this->Controls->Add(this->titleBox);
@@ -256,22 +256,21 @@ namespace LOCKER {
 #pragma endregion
 	public:
 		int currentPicEdit = 0;
-		String^ jsonFilePath;
-		System::Collections::Generic::Dictionary<String^, String^> imageJson;
+		System::String^ jsonFilePathEdit;
 
 	private: System::Void UpdateImage() {
 		msclr::interop::marshal_context context;
-		std::string jsonFilePathString = "C:\\Users\\iamma\\source\\repos\\LOCKER\\LOCKER\\UserFolders\\jonor\\jonor.json";
+		std::string jsonFilePathString = context.marshal_as<std::string>(jsonFilePathEdit);
 		std::ifstream inJson(jsonFilePathString);
-		nlohmann::json nlohmannJson;
-		inJson >> nlohmannJson;
+		nlohmann::ordered_json imageJson;
+		inJson >> imageJson;
 
 		// Get image path, description, and title
-		std::string imagePath = nlohmannJson["images"][currentPicEdit]["imgpath"].get<std::string>();
-		std::string imgDesc = nlohmannJson["images"][currentPicEdit]["img_desc"].get<std::string>();
-		std::string imgTitle = nlohmannJson["images"][currentPicEdit]["img_title"].get<std::string>();
-		std::string imgMonth = nlohmannJson["images"][currentPicEdit]["img_month"].get<std::string>();
-		std::string imgYear = nlohmannJson["images"][currentPicEdit]["img_year"].get<std::string>();
+		std::string imagePath = imageJson["images"][currentPicEdit]["imgpath"].get<std::string>();
+		std::string imgDesc = imageJson["images"][currentPicEdit]["img_desc"].get<std::string>();
+		std::string imgTitle = imageJson["images"][currentPicEdit]["img_title"].get<std::string>();
+		std::string imgMonth = imageJson["images"][currentPicEdit]["img_month"].get<std::string>();
+		std::string imgYear = imageJson["images"][currentPicEdit]["img_year"].get<std::string>();
 
 		// Update PictureBox with the image
 		String^ imagePathStr = gcnew String(imagePath.c_str());
@@ -282,15 +281,15 @@ namespace LOCKER {
 		String^ monthNyear = gcnew String(imgMonth.c_str()) + " " + gcnew String(imgYear.c_str());
 
 		// Display image description and title
-		titleBox->Text = gcnew String(imgDesc.c_str());
-		descBox->Text = gcnew String(imgTitle.c_str());
+		titleBox->Text = gcnew String(imgTitle.c_str());
+		descBox->Text = gcnew String(imgDesc.c_str());
 		label4->Text = monthNyear;
 	}
 
 	public: bool saveEntry = false;
 	private: System::Void saveButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		msclr::interop::marshal_context context;
-		std::string jsonFilePathString = "C:\\Users\\iamma\\source\\repos\\LOCKER\\LOCKER\\UserFolders\\jonor\\jonor.json";
+		std::string jsonFilePathString = context.marshal_as<std::string>(jsonFilePathEdit);
 		nlohmann::json nlohmannJson;
 
 		// Read the existing JSON data

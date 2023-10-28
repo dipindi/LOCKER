@@ -202,7 +202,7 @@ namespace LOCKER {
 				static_cast<System::Int32>(static_cast<System::Byte>(235)));
 			this->button5->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->button5->Font = (gcnew System::Drawing::Font(L"Fira Code", 8));
-			this->button5->Location = System::Drawing::Point(531, 461);
+			this->button5->Location = System::Drawing::Point(444, 655);
 			this->button5->Name = L"button5";
 			this->button5->Size = System::Drawing::Size(81, 36);
 			this->button5->TabIndex = 16;
@@ -229,7 +229,7 @@ namespace LOCKER {
 				static_cast<System::Int32>(static_cast<System::Byte>(235)));
 			this->sortButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->sortButton->Font = (gcnew System::Drawing::Font(L"Fira Code", 8));
-			this->sortButton->Location = System::Drawing::Point(531, 406);
+			this->sortButton->Location = System::Drawing::Point(357, 655);
 			this->sortButton->Name = L"sortButton";
 			this->sortButton->Size = System::Drawing::Size(81, 36);
 			this->sortButton->TabIndex = 17;
@@ -285,13 +285,17 @@ namespace LOCKER {
 		this->Close();
 	}
 
-	public:	String^ jsonFilePath; 
+	public:
+		String^ jsonFilePath; 
+		int numEntries;
 	private: System::Void UpdateImage() {
 		msclr::interop::marshal_context context;
 		std::string jsonFilePathString = context.marshal_as<std::string>(jsonFilePath);
 		nlohmann::ordered_json imageJson;
 		std::ifstream inJson(jsonFilePathString);
 		inJson >> imageJson;
+
+		numEntries = imageJson["images"].size();
 
 		// Get image path, description, and title
 		std::string imagePath = imageJson["images"][currentPicture]["imgpath"].get<std::string>();
@@ -325,21 +329,21 @@ private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArg
 
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (filter == false) {
-			currentPicture++;
-			UpdateImage();
+				currentPicture++;
+				UpdateImage(); 
 		}
 		if (filter == true) {
-			currentPicture--;
-			UpdateImage();
+				currentPicture--;
+				UpdateImage();
 		}
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (filter == true) {
-			currentPicture++;
-			UpdateImage();
-		}
 		if (filter == false) {
 			currentPicture--;
+			UpdateImage();
+		}
+		if (filter == true) {
+			currentPicture++;
 			UpdateImage();
 		}
 	}

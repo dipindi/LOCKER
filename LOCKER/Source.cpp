@@ -138,16 +138,15 @@ void uploadWindow() {
 } // end of upload window
 
 void editWindow() {
-	LOCKER::editForm edit;
-	edit.ShowDialog();
-
 	static int currUserIndex = 0;
 	std::ifstream inJson(currUserPath + currUser + "\\" + currUser + ".json");
 	nlohmann::ordered_json imageJson;
 	inJson >> imageJson;
+	LOCKER::editForm edit;
 	std::string jsonPathStr = currUserPath + currUser + "\\" + currUser + ".json";
 	System::String^ jsonPath = gcnew String(jsonPathStr.c_str());
-	edit.jsonFilePath = "C:\\Users\\iamma\\source\\repos\\LOCKER\\LOCKER\\UserFolders\\jonor\\jonor.json";
+	edit.jsonFilePathEdit = jsonPath;
+	edit.ShowDialog();
 
 	if (edit.saveEntry) {
 		homeWindow();
