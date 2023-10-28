@@ -276,9 +276,8 @@ namespace LOCKER {
 
 		}
 #pragma endregion
-
+	public:
 		array<String^>^ files;
-
 		int currentIndex;
 
 	public: bool backToHome = false;

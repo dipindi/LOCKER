@@ -52,6 +52,7 @@ namespace LOCKER {
 	private: System::Windows::Forms::Button^ button5;
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Button^ sortButton;
+	private: System::Windows::Forms::ComboBox^ yearMenu;
 
 
 	private:
@@ -75,6 +76,7 @@ namespace LOCKER {
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->sortButton = (gcnew System::Windows::Forms::Button());
+			this->yearMenu = (gcnew System::Windows::Forms::ComboBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->headerImage))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->logoutButton))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
@@ -237,12 +239,33 @@ namespace LOCKER {
 			this->sortButton->UseVisualStyleBackColor = false;
 			this->sortButton->Click += gcnew System::EventHandler(this, &homeForm::sortButton_Click);
 			// 
+			// yearMenu
+			// 
+			this->yearMenu->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(156)),
+				static_cast<System::Int32>(static_cast<System::Byte>(48)));
+			this->yearMenu->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->yearMenu->Font = (gcnew System::Drawing::Font(L"Fira Code", 8));
+			this->yearMenu->FormattingEnabled = true;
+			this->yearMenu->Items->AddRange(gcnew cli::array< System::Object^  >(27) {
+				L"All", L"1998", L"1999", L"2000", L"2001", L"2002",
+					L"2003", L"2004", L"2005", L"2006", L"2007", L"2008", L"2009", L"2010", L"2011", L"2012", L"2013", L"2014", L"2015", L"2016",
+					L"2017", L"2018", L"2019", L"2020", L"2021", L"2022", L"2023"
+			});
+			this->yearMenu->Location = System::Drawing::Point(423, 113);
+			this->yearMenu->Name = L"yearMenu";
+			this->yearMenu->RightToLeft = System::Windows::Forms::RightToLeft::No;
+			this->yearMenu->Size = System::Drawing::Size(88, 29);
+			this->yearMenu->TabIndex = 23;
+			this->yearMenu->Text = L"All";
+			this->yearMenu->SelectedIndexChanged += gcnew System::EventHandler(this, &homeForm::yearMenu_SelectedIndexChanged);
+			// 
 			// homeForm
 			// 
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(244)),
 				static_cast<System::Int32>(static_cast<System::Byte>(235)));
 			this->ClientSize = System::Drawing::Size(624, 703);
+			this->Controls->Add(this->yearMenu);
 			this->Controls->Add(this->sortButton);
 			this->Controls->Add(this->button5);
 			this->Controls->Add(this->button4);
@@ -288,37 +311,71 @@ namespace LOCKER {
 	public:
 		String^ jsonFilePath; 
 		int numEntries;
+		String^ selectedYear;
 	private: System::Void UpdateImage() {
 		msclr::interop::marshal_context context;
 		std::string jsonFilePathString = context.marshal_as<std::string>(jsonFilePath);
 		nlohmann::ordered_json imageJson;
+		nlohmann::json imageJsonAsc;
+		nlohmann::json imageJsonDesc;
 		std::ifstream inJson(jsonFilePathString);
 		inJson >> imageJson;
 
+		imageJsonDesc = imageJsonAsc;
 		numEntries = imageJson["images"].size();
 
-		// Get image path, description, and title
-		std::string imagePath = imageJson["images"][currentPicture]["imgpath"].get<std::string>();
-		std::string imgDesc = imageJson["images"][currentPicture]["img_desc"].get<std::string>();
-		std::string imgTitle = imageJson["images"][currentPicture]["img_title"].get<std::string>();
-		std::string imgMonth = imageJson["images"][currentPicture]["img_month"].get<std::string>();
-		std::string imgYear = imageJson["images"][currentPicture]["img_year"].get<std::string>();
-
-		// Update PictureBox with the image
-		String^ imagePathStr = gcnew String(imagePath.c_str());
-		if (System::IO::File::Exists(imagePathStr)) {
-			pictureBox1->ImageLocation = imagePathStr;
+		std::vector<int> matchingIndices;
+		for (int i = 0; i < numEntries; i++) {
+			std::string imgYear = imageJson["images"][i]["img_year"].get<std::string>();
+			if (selectedYear == "" || selectedYear == gcnew String(imgYear.c_str())) {
+				matchingIndices.push_back(i);
+			}
 		}
 
-		String^ monthNyear = gcnew String(imgMonth.c_str()) + " " + gcnew String(imgYear.c_str());
+			if (selectedYear == "All") {
+				// Get image path, description, and title
+				std::string imagePath = imageJson["images"][currentPicture]["imgpath"].get<std::string>();
+				std::string imgDesc = imageJson["images"][currentPicture]["img_desc"].get<std::string>();
+				std::string imgTitle = imageJson["images"][currentPicture]["img_title"].get<std::string>();
+				std::string imgMonth = imageJson["images"][currentPicture]["img_month"].get<std::string>();
+				std::string imgYear = imageJson["images"][currentPicture]["img_year"].get<std::string>();
 
-		// Display image description and title
-		label1->Text = gcnew String(imgDesc.c_str());
-		label2->Text = gcnew String(imgTitle.c_str());
-		label4->Text = monthNyear;
+				// Update PictureBox with the image
+				String^ imagePathStr = gcnew String(imagePath.c_str());
+				if (System::IO::File::Exists(imagePathStr)) {
+					pictureBox1->ImageLocation = imagePathStr;
+				}
 
-		pictureBox1->BringToFront();
-	}
+				// Update image description and title
+				label1->Text = gcnew String(imgDesc.c_str());
+				label2->Text = gcnew String(imgTitle.c_str());
+				String^ monthNyear = gcnew String(imgMonth.c_str()) + " " + gcnew String(imgYear.c_str());
+				label4->Text = monthNyear;
+			}
+			else {
+				int imageIndex = matchingIndices[currentPicture];
+
+				// Get image path, description, title, and other details
+				std::string imagePath = imageJson["images"][imageIndex]["imgpath"].get<std::string>();
+				std::string imgDesc = imageJson["images"][imageIndex]["img_desc"].get<std::string>();
+				std::string imgTitle = imageJson["images"][imageIndex]["img_title"].get<std::string>();
+				std::string imgMonth = imageJson["images"][imageIndex]["img_month"].get<std::string>();
+				std::string imgYear = imageJson["images"][imageIndex]["img_year"].get<std::string>();
+
+				// Update PictureBox with the image
+				String^ imagePathStr = gcnew String(imagePath.c_str());
+				if (System::IO::File::Exists(imagePathStr)) {
+					pictureBox1->ImageLocation = imagePathStr;
+				}
+
+				// Update image description and title
+				label1->Text = gcnew String(imgDesc.c_str());
+				label2->Text = gcnew String(imgTitle.c_str());
+				String^ monthNyear = gcnew String(imgMonth.c_str()) + " " + gcnew String(imgYear.c_str());
+				label4->Text = monthNyear;
+			}
+		}
+
 	private: System::Void label1_Click_1(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -387,6 +444,10 @@ public:
 private: System::Void sortButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	filter ? true : false;
 	filter = !filter;
+}
+private: System::Void yearMenu_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+	selectedYear = yearMenu->Text;
+	UpdateImage();
 }
 };
 }
