@@ -51,7 +51,7 @@ namespace LOCKER {
 	private: System::Windows::Forms::Button^ button4;
 	private: System::Windows::Forms::Button^ button5;
 	private: System::Windows::Forms::Button^ button2;
-	private: System::Windows::Forms::Button^ sortButton;
+
 	private: System::Windows::Forms::ComboBox^ yearMenu;
 
 
@@ -75,7 +75,6 @@ namespace LOCKER {
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->sortButton = (gcnew System::Windows::Forms::Button());
 			this->yearMenu = (gcnew System::Windows::Forms::ComboBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->headerImage))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->logoutButton))->BeginInit();
@@ -145,7 +144,7 @@ namespace LOCKER {
 			this->label1->AutoSize = true;
 			this->label1->Location = System::Drawing::Point(110, 619);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(146, 32);
+			this->label1->Size = System::Drawing::Size(122, 25);
 			this->label1->TabIndex = 10;
 			this->label1->Text = L"description";
 			this->label1->Click += gcnew System::EventHandler(this, &homeForm::label1_Click_1);
@@ -153,10 +152,10 @@ namespace LOCKER {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Font = (gcnew System::Drawing::Font(L"PP Agrandir Text", 14, System::Drawing::FontStyle::Bold));
+			this->label2->Font = (gcnew System::Drawing::Font(L"PP Agrandir Text", 16, System::Drawing::FontStyle::Bold));
 			this->label2->Location = System::Drawing::Point(110, 563);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(79, 32);
+			this->label2->Size = System::Drawing::Size(71, 29);
 			this->label2->TabIndex = 11;
 			this->label2->Text = L"TITLE";
 			this->label2->Click += gcnew System::EventHandler(this, &homeForm::label2_Click);
@@ -179,7 +178,7 @@ namespace LOCKER {
 			this->label4->Font = (gcnew System::Drawing::Font(L"PP Agrandir Text", 12, System::Drawing::FontStyle::Bold));
 			this->label4->Location = System::Drawing::Point(111, 595);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(68, 26);
+			this->label4->Size = System::Drawing::Size(54, 21);
 			this->label4->TabIndex = 14;
 			this->label4->Text = L"0000";
 			this->label4->Click += gcnew System::EventHandler(this, &homeForm::label4_Click);
@@ -204,7 +203,7 @@ namespace LOCKER {
 				static_cast<System::Int32>(static_cast<System::Byte>(235)));
 			this->button5->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->button5->Font = (gcnew System::Drawing::Font(L"Fira Code", 8));
-			this->button5->Location = System::Drawing::Point(444, 655);
+			this->button5->Location = System::Drawing::Point(531, 470);
 			this->button5->Name = L"button5";
 			this->button5->Size = System::Drawing::Size(81, 36);
 			this->button5->TabIndex = 16;
@@ -225,20 +224,6 @@ namespace LOCKER {
 			this->button2->UseVisualStyleBackColor = false;
 			this->button2->Click += gcnew System::EventHandler(this, &homeForm::button2_Click);
 			// 
-			// sortButton
-			// 
-			this->sortButton->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(244)),
-				static_cast<System::Int32>(static_cast<System::Byte>(235)));
-			this->sortButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->sortButton->Font = (gcnew System::Drawing::Font(L"Fira Code", 8));
-			this->sortButton->Location = System::Drawing::Point(357, 655);
-			this->sortButton->Name = L"sortButton";
-			this->sortButton->Size = System::Drawing::Size(81, 36);
-			this->sortButton->TabIndex = 17;
-			this->sortButton->Text = L"sort";
-			this->sortButton->UseVisualStyleBackColor = false;
-			this->sortButton->Click += gcnew System::EventHandler(this, &homeForm::sortButton_Click);
-			// 
 			// yearMenu
 			// 
 			this->yearMenu->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(156)),
@@ -254,7 +239,7 @@ namespace LOCKER {
 			this->yearMenu->Location = System::Drawing::Point(423, 113);
 			this->yearMenu->Name = L"yearMenu";
 			this->yearMenu->RightToLeft = System::Windows::Forms::RightToLeft::No;
-			this->yearMenu->Size = System::Drawing::Size(88, 29);
+			this->yearMenu->Size = System::Drawing::Size(88, 25);
 			this->yearMenu->TabIndex = 23;
 			this->yearMenu->Text = L"All";
 			this->yearMenu->SelectedIndexChanged += gcnew System::EventHandler(this, &homeForm::yearMenu_SelectedIndexChanged);
@@ -266,7 +251,6 @@ namespace LOCKER {
 				static_cast<System::Int32>(static_cast<System::Byte>(235)));
 			this->ClientSize = System::Drawing::Size(624, 703);
 			this->Controls->Add(this->yearMenu);
-			this->Controls->Add(this->sortButton);
 			this->Controls->Add(this->button5);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->label4);
@@ -294,7 +278,7 @@ namespace LOCKER {
 		}
 #pragma endregion
 	public: bool signOff = false;
-		  int currentPicture = 0;
+		  int currentPicture;
 	private: System::Void logoutButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		signOff = true;
 		this->Close();

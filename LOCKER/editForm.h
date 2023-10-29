@@ -71,6 +71,8 @@ namespace LOCKER {
 		{
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->saveButton = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->titleLabel = (gcnew System::Windows::Forms::Label());
 			this->titleBox = (gcnew System::Windows::Forms::TextBox());
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
@@ -78,8 +80,6 @@ namespace LOCKER {
 			this->imageEdit = (gcnew System::Windows::Forms::PictureBox());
 			this->descLabel = (gcnew System::Windows::Forms::Label());
 			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->panel1->SuspendLayout();
 			this->panel2->SuspendLayout();
@@ -111,6 +111,32 @@ namespace LOCKER {
 			this->saveButton->UseVisualStyleBackColor = false;
 			this->saveButton->Click += gcnew System::EventHandler(this, &editForm::saveButton_Click);
 			// 
+			// button2
+			// 
+			this->button2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(156)),
+				static_cast<System::Int32>(static_cast<System::Byte>(48)));
+			this->button2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button2->Location = System::Drawing::Point(99, 11);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(81, 41);
+			this->button2->TabIndex = 33;
+			this->button2->Text = L">";
+			this->button2->UseVisualStyleBackColor = false;
+			this->button2->Click += gcnew System::EventHandler(this, &editForm::button2_Click);
+			// 
+			// button1
+			// 
+			this->button1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(156)),
+				static_cast<System::Int32>(static_cast<System::Byte>(48)));
+			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button1->Location = System::Drawing::Point(12, 11);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(81, 41);
+			this->button1->TabIndex = 32;
+			this->button1->Text = L"<";
+			this->button1->UseVisualStyleBackColor = false;
+			this->button1->Click += gcnew System::EventHandler(this, &editForm::button1_Click);
+			// 
 			// titleLabel
 			// 
 			this->titleLabel->AutoSize = true;
@@ -119,7 +145,7 @@ namespace LOCKER {
 			this->titleLabel->ForeColor = System::Drawing::SystemColors::ControlText;
 			this->titleLabel->Location = System::Drawing::Point(308, 36);
 			this->titleLabel->Name = L"titleLabel";
-			this->titleLabel->Size = System::Drawing::Size(65, 26);
+			this->titleLabel->Size = System::Drawing::Size(53, 21);
 			this->titleLabel->TabIndex = 29;
 			this->titleLabel->Text = L"TITLE";
 			// 
@@ -130,7 +156,7 @@ namespace LOCKER {
 			this->titleBox->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->titleBox->Location = System::Drawing::Point(312, 63);
 			this->titleBox->Name = L"titleBox";
-			this->titleBox->Size = System::Drawing::Size(280, 34);
+			this->titleBox->Size = System::Drawing::Size(280, 28);
 			this->titleBox->TabIndex = 26;
 			// 
 			// panel2
@@ -172,7 +198,7 @@ namespace LOCKER {
 				static_cast<System::Byte>(0)));
 			this->descLabel->Location = System::Drawing::Point(308, 94);
 			this->descLabel->Name = L"descLabel";
-			this->descLabel->Size = System::Drawing::Size(149, 26);
+			this->descLabel->Size = System::Drawing::Size(120, 21);
 			this->descLabel->TabIndex = 30;
 			this->descLabel->Text = L"DESCRIPTION";
 			// 
@@ -183,36 +209,10 @@ namespace LOCKER {
 			this->label4->ForeColor = System::Drawing::SystemColors::ActiveBorder;
 			this->label4->Location = System::Drawing::Point(379, 36);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(68, 26);
+			this->label4->Size = System::Drawing::Size(54, 21);
 			this->label4->TabIndex = 31;
 			this->label4->Text = L"0000";
 			this->label4->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
-			// 
-			// button1
-			// 
-			this->button1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(156)),
-				static_cast<System::Int32>(static_cast<System::Byte>(48)));
-			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button1->Location = System::Drawing::Point(12, 11);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(81, 41);
-			this->button1->TabIndex = 32;
-			this->button1->Text = L"<";
-			this->button1->UseVisualStyleBackColor = false;
-			this->button1->Click += gcnew System::EventHandler(this, &editForm::button1_Click);
-			// 
-			// button2
-			// 
-			this->button2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(248)), static_cast<System::Int32>(static_cast<System::Byte>(156)),
-				static_cast<System::Int32>(static_cast<System::Byte>(48)));
-			this->button2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button2->Location = System::Drawing::Point(99, 11);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(81, 41);
-			this->button2->TabIndex = 33;
-			this->button2->Text = L">";
-			this->button2->UseVisualStyleBackColor = false;
-			this->button2->Click += gcnew System::EventHandler(this, &editForm::button2_Click);
 			// 
 			// button3
 			// 
@@ -255,7 +255,7 @@ namespace LOCKER {
 		}
 #pragma endregion
 	public:
-		int currentPicEdit = 0;
+		int currentPicEdit;
 		System::String^ jsonFilePathEdit;
 
 	private: System::Void UpdateImage() {

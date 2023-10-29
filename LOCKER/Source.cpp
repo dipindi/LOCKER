@@ -24,6 +24,7 @@ void editWindow();
 
 std::string currUser;
 std::string currUserPath = fs::current_path().string() + "\\UserFolders\\" + currUser;
+int currPicIndex;
 
 
 [STAThreadAttribute]
@@ -73,6 +74,8 @@ void homeWindow() {
 	home.jsonFilePath = jsonPath;
 	home.ShowDialog();
 
+	currPicIndex = home.currentPicture;
+
 	if (home.signOff) {
 		startLocker();
 	}
@@ -89,7 +92,11 @@ void homeWindow() {
 void uploadWindow() {
 	LOCKER::uploadForm upload;
 	upload.ShowDialog();
-	if (upload.backToHome) {
+	if (upload.backToHomeCancel) {
+		homeWindow();
+	}
+	if (upload.backToHomeSuccess) {
+
 		nlohmann::ordered_json currUserJson;
 		System::String^ imgpath = upload.path;
 		System::String^ imgname = upload.name;
@@ -147,6 +154,8 @@ void editWindow() {
 	System::String^ jsonPath = gcnew String(jsonPathStr.c_str());
 	edit.jsonFilePathEdit = jsonPath;
 	edit.ShowDialog();
+
+	edit.currentPicEdit = currPicIndex;
 
 	if (edit.saveEntry) {
 		homeWindow();

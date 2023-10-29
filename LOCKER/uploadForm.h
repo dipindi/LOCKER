@@ -280,18 +280,20 @@ namespace LOCKER {
 		array<String^>^ files;
 		int currentIndex;
 
-	public: bool backToHome = false;
+	public:
+		bool backToHomeSuccess = false;
+		bool backToHomeCancel = false;
 	public:      System::String^ path;
 	public:		 System::String^ name;
 	private: System::Void cancelButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		backToHome = true;
+		backToHomeCancel = true;
 		this->Close();
 	}
 
 	private: System::Void confirmButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		MessageBox::Show("Entry successfully uploaded");
 
-		backToHome = true;
+		backToHomeSuccess = true;
 		this->Close();
 	}
 	private: System::Void uploadButton_Click(System::Object^ sender, System::EventArgs^ e) {
